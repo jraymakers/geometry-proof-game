@@ -1,0 +1,29 @@
+{
+  "name": "web-app-template",
+  "description": "Template for web apps built with React, TypeScript, TypeStyle, and Webpack",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jraymakers/web-app-template.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "16.9.34",
+    "@types/react-dom": "16.9.6",
+    "@typescript-eslint/eslint-plugin": "2.29.0",
+    "@typescript-eslint/parser": "2.29.0",
+    "basic-serve": "0.1.0",
+    "eslint": "6.8.0",
+    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-react-hooks": "3.0.0",
+    "fs-extra": "9.0.0",
+    "jr": "0.5.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "ts-loader": "7.0.1",
+    "typescript": "3.8.3",
+    "typestyle": "2.1.0",
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.11"
+  }
+}
