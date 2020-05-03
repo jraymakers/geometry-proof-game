@@ -1,9 +1,9 @@
 import { Term, VariableTerm } from './Term';
 import { Predicate } from './Predicate';
 
-export type AtomicFormula = Readonly<{
-  formulaType: 'atomic';
-  predicate: Predicate;
+export type PredicateFormula = Readonly<{
+  formulaType: 'predicate';
+  predicate: Predicate; // should equality be a predicate, or special? A: special because of identity rules
   terms: readonly Term[];
 }>;
 
@@ -34,7 +34,7 @@ export type QuantifiedFormula = Readonly<{
 }>;
 
 export type Formula
-  = AtomicFormula
+  = PredicateFormula
   | UnaryFormula
   | BinaryFormula
   | QuantifiedFormula
