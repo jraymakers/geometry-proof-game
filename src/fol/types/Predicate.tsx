@@ -13,3 +13,7 @@ export type Predicate = Readonly<{
   name: string;
   argSorts: readonly AtomicSort[];
 }>;
+
+// Q: Should the predicate name be unique?
+//    Or should the argSorts be part of the signature?
+//    Probably should include argSorts.

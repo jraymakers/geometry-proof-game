@@ -1,4 +1,5 @@
 import { Formula } from './Formula';
+import { FormulaPattern } from './FormulaPattern';
 
 // need ways to express:
 // constraint: formula contains constant c
@@ -61,56 +62,178 @@ import { Formula } from './Formula';
 //      - replace all instances of variable x with constant c
 //      - replace some instances of constant c with variable x
 //      - replace some instances of constant a with constant b
-// - constant c must not occur in any undischanged assumption, from given step
+// - constant c must not occur in any undischarged assumption, from given step
+// - given two formulas, one is assumption and one is conclusion of the same subproof
+// - implicit: all input formulas and subproofs are in scope
+
+export type FormulaContainsConstantProofRuleConstraint = Readonly<{
+  proofRuleConstraintType: 'FormulaContainsConstant';
+  formulaId: string;
+  constantId: string;
+}>;
+
+export type FormulaDoesNotContainConstantProofRuleConstraint = Readonly<{
+  proofRuleConstraintType: 'FormulaDoesNotContainConstant';
+  formulaId: string;
+  constantId: string;
+}>;
+
+export type FormulaDoesNotContainVariableProofRuleConstraint = Readonly<{
+  proofRuleConstraintType: 'FormulaDoesNotContainVariable';
+  formulaId: string;
+  variableId: string;
+}>;
+
+export type FormulaIsSubstitutionOfAllVariableInstancesWithConstantProofRuleConstraint = Readonly<{
+  proofRuleConstraintType: 'FormulaIsSubstitutionOfAllVariableInstancesWithConstant';
+  sourceFormulaId: string;
+  targetFormulaId: string;
+  sourceVariableId: string;
+  targetConstantId: string;
+}>;
+
+export type FormulaIsSubstitutionOfSomeConstantInstancesWithVariableProofRuleConstraint = Readonly<{
+  proofRuleConstraintType: 'FormulaIsSubstitutionOfSomeConstantInstancesWithVariable';
+  sourceFormulaId: string;
+  targetFormulaId: string;
+  sourceConstantId: string;
+  targetVariableId: string;
+}>;
+
+export type FormulaIsSubstitutionOfSomeConstantInstancesWithConstantProofRuleConstraint = Readonly<{
+  proofRuleConstraintType: 'FormulaIsSubstitutionOfSomeConstantInstancesWithConstant';
+  sourceFormulaId: string;
+  targetFormulaId: string;
+  sourceConstantId: string;
+  targetConstantId: string;
+}>;
+
+export type ConstantMustNotOccurInUndischargedAssumptionProofRuleConstraint = Readonly<{
+  constantId: string;
+  formulaId: string; // formula from which to check
+}>;
+
+export type FormulasAreSubproofAssumptionAndConclusionProofRuleConstraint = Readonly<{
+  assumptionFormulaId: string;
+  conclusionFormulaId: string;
+}>;
+
+export type FormulasMatchesPatternProofRuleConstraint = Readonly<{
+  formulaId: string;
+  formulaPattern: FormulaPattern;
+}>;
+
+export type ProofRuleConstraint
+  = FormulaContainsConstantProofRuleConstraint
+  | FormulaDoesNotContainConstantProofRuleConstraint
+  | FormulaDoesNotContainVariableProofRuleConstraint
+  | FormulaIsSubstitutionOfAllVariableInstancesWithConstantProofRuleConstraint
+  | FormulaIsSubstitutionOfSomeConstantInstancesWithVariableProofRuleConstraint
+  | FormulaIsSubstitutionOfSomeConstantInstancesWithConstantProofRuleConstraint
+  | ConstantMustNotOccurInUndischargedAssumptionProofRuleConstraint
+  | FormulasAreSubproofAssumptionAndConclusionProofRuleConstraint
+  | FormulasMatchesPatternProofRuleConstraint
+  ;
 
 export type ProofRule = Readonly<{
   name: string;
 
   // symbols of name terms in formula patterns are placeholders
   // can variables be placholders?
-  inputFormulaPatterns: readonly Formula[];
+  // inputFormulaPatterns: readonly Formula[];
 
   // step ids in subproof patterns are separate from the main proof; they must be mapped
   // any formulas in subproof patterns are formula patterns (see above)
-  inputSubproofPatterns: readonly Proof[];
+  // inputSubproofPatterns: readonly Proof[];
 
   // output formula pattern can only use placeholders used in input patterns
-  outputFormulaPattern: Formula;
+  // outputFormulaPattern: Formula;
+
+  // inputFormulaIds: { readonly [formulaId: string]: true };
+  // inputSubproofIds: { readonly [subproofId: string]: true };
+  // inputConstantIds: { readonly [constantId: string]: true };
+  // inputVariableIds: { readonly [variableId: string]: true };
+  // inputTermIds: { readonly [termId: string]: true };
+
+  // OR
+
+  inputTypes: { readonly [inputId: string]: ProofRuleInputType };
+  constraints: readonly ProofRuleConstraint[];
 }>;
 
-export type AssumptionProofStep = Readonly<{
-  proofStepType: 'assumption';
-  formula: Formula;
+export type LocalFormulaReference = Readonly<{
+  formulaReferenceType: 'local';
+  formulaType: 'assumption' | 'conclusion';
+  formulaIndex: number; // index or ids?
 }>;
+
+export type ParentProofFormulaReference = Readonly<{
+  formulaReferenceType: 'parentProof';
+  referenceFromParentProof: FormulaReference;
+}>;
+
+export type SubproofFormulaReference = Readonly<{
+  formulaReferenceType: 'subproof';
+  subproofIndex: number; // index or ids?
+  referenceFromSubproof: FormulaReference;
+}>;
+
+export type FormulaReference
+  = LocalFormulaReference
+  | ParentProofFormulaReference
+  | SubproofFormulaReference
+  ;
+
+export type FormulaReferenceProofRuleInput = Readonly<{
+  proofRuleInputType: 'formulaReference';
+  formulaReference: FormulaReference;
+}>;
+
+export type SubproofFormulasProofRuleInput = Readonly<{
+  proofRuleInputType: 'subproofFormulas';
+  subproofIndex: FormulaReference;
+  assumptionIndex: number; // index or ids?
+  conclusionIndex: number; // index or ids?
+}>;
+
+export type ConstantNameProofRuleInput = Readonly<{
+  proofRuleInputType: 'constantName';
+  constantName: string;
+}>;
+
+export type VariableNameProofRuleInput = Readonly<{
+  proofRuleInputType: 'variableName';
+  variableName: string;
+}>;
+
+export type ProofRuleInput
+  = FormulaReferenceProofRuleInput
+  | ConstantNameProofRuleInput
+  | VariableNameProofRuleInput
+  ;
+
+export type ProofRuleInputType = ProofRuleInput['proofRuleInputType'];
 
 export type RuleApplicationProofStep = Readonly<{
   proofStepType: 'ruleApplication';
+  parentProof: Proof;
   rule: ProofRule;
-
-  /** id of (previous) step (containing formula) for each input formula pattern in rule */
-  inputFormulaSteps: string[];
-
-  /** id of (previous) subproof step for each input subproof formula in rule */
-  inputSubproofSteps: string[];
-
-  // should this be explicit or implicit?
-  // perhaps stored/cached separately?
-  // formula: Formula;
+  inputs: { [inputId: string]: ProofRuleInput };
+  formula: Formula;
 }>;
 
-// it may be that a subproof can only have a single assumption,
-// in order for rules referring to subproofs to work
 export type SubproofProofStep = Readonly<{
   proofStepType: 'subproof';
+  parentProof: Proof;
   subproof: Proof;
 }>;
 
 export type ProofStep
-  = AssumptionProofStep
-  | RuleApplicationProofStep
+  = RuleApplicationProofStep
   | SubproofProofStep
   ;
 
 export type Proof = Readonly<{
-  steps: { [id: string]: ProofStep };
+  assumptions: readonly Formula[]; // index or ids?
+  conclusions: readonly ProofStep[]; // index or ids?
 }>;

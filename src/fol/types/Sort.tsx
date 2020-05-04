@@ -2,6 +2,7 @@
 // line
 // circle
 export type AtomicSort = Readonly<{
+  sortType: 'atomic';
   name: string;
 }>;
 
@@ -9,6 +10,7 @@ export type AtomicSort = Readonly<{
 // angle(point, point, point)
 // area(point, point, point)
 export type FunctionSort = Readonly<{
+  sortType: 'function';
   name: string;
   argSorts: readonly AtomicSort[];
 }>;

@@ -3,8 +3,14 @@ import { Predicate } from './Predicate';
 
 export type PredicateFormula = Readonly<{
   formulaType: 'predicate';
-  predicate: Predicate; // should equality be a predicate, or special? A: special because of identity rules
+  predicate: Predicate;
   terms: readonly Term[];
+}>;
+
+export type EqualityFormula = Readonly<{
+  formulaType: 'equality';
+  term1: Term;
+  term2: Term;
 }>;
 
 export type UnaryOperator = '¬';
@@ -33,9 +39,15 @@ export type QuantifiedFormula = Readonly<{
   formula: Formula; // must contain `variable` but not a quantified formula of `variable`
 }>;
 
+export type FalseFormula = Readonly<{
+  formulaType: 'false';
+}>;
+
 export type Formula
   = PredicateFormula
+  | EqualityFormula
   | UnaryFormula
   | BinaryFormula
   | QuantifiedFormula
+  | FalseFormula
   ;
