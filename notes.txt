@@ -323,3 +323,4 @@ symmetry-of-equality(ab=bc):
 transitivity-of-equality(bc=ab,ab=ca):
 => bc=ca *
 
+---
