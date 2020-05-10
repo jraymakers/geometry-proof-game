@@ -1,0 +1,325 @@
+Formal System for Euclid:
+
+
+Sorts:
+
+Diagram (Geometric) Objects (atomic, have variables):
+- point
+- line
+- circle
+
+Magnitude (Metric) Objects (function, no variables):
+- segment(point, point)
+- angle(point, point, point)
+- area(point, point, point)
+
+
+Relations/Predicates:
+
+- on(point, line)
+- same-side(point, point, line) // strict
+- between(point, point, point) // strict
+
+- on(point, circle)
+- inside(point, circle)
+- center(point, circle)
+
+- intersects(line, line) // transverse
+- intersects(line, circle) // transverse
+- intersects(circle, circle) // transverse
+
+- equality // for all six sorts
+- addition // for the three magnitude sorts
+- less-than // for the three magnitude sorts
+
+
+Constants:
+
+- zero // for the three magnitude sorts
+- right-angle // for angle sort
+
+
+Formulas:
+
+Atomic Formula:
+- predicate
+- "false"
+
+Literal (aka assertion):
+- atomic formula
+- negation of atomic forula
+
+Theorem/Sequent:
+
+- Given a diagram with
+  - set of diagram objects (points, lines, circles) ("for all")
+  - conjunction of literals referring to those objects
+- Can construct
+  - new set of diagram objects ("there exists")
+  - satisfying new conjuction of literals referring to all objects OR "false"
+    (note right hand side is conjunction instead of typical disjunction)
+
+Proof:
+
+- set of construction steps and deductive steps
+  - construction steps introduce new objects and assertions (on the rhs)
+  - deductive steps just introduce new assertios (on the rhs)
+    - diagrammic inferences: direct diagrammic consequences of diagrammic assertions
+    - metric inferences: direct metric consequences of metric assertions
+    - transfer inferences: metric or diagrammic assertions inferred from existin metric or diagramic assertions
+
+Each proof step applies a theorem to a sequent, thus inferring a new sequent
+- first:
+  - rename all free variables in the theorem to match those in the sequent
+  - and all bound variables (on the rhs) so they don't conflict with any in the sequent
+- then:
+  - check that every assertion on the lhs of the (renamed) theorem is
+    a direct diagram or metric consequence of the assertions in the sequent (both sides)
+- then:
+  - select a subset of conclusions and variables/objects (rhs) from the (renamed) theorem
+- finally:
+  - conclude a new sequent, same as the original, but plus the selected conclusions and variables/objects (rhs)
+
+Variable renaming / substitution:
+- can of course trivially rename free variables (assuming no conflict with others)
+- can rename bound variables to match free variables (are there restrictions?)
+
+A proof proves a given theorem if it contains a sequent that matches the theorem after renaming
+
+---
+
+Construction rules:
+
+construct-circle
+
+point a
+point b
+~(a=b)
+=>
+circle alpha
+center(a, alpha)
+on(b, alpha)
+
+construct-circle-circle-intersection-point
+
+circle alpha
+circle beta
+intersect(alpha, beta)
+=>
+point a
+on(a, alpha)
+on(a, beta)
+
+Diagrammic inference rules:
+
+center-inside
+
+point a
+circle alpha
+center(a, alpha)
+=>
+inside(a, alpha)
+
+circles-intersect-mutual-in
+
+circle alpha
+circle beta
+point a
+point b
+on(a, alpha)
+on(b, beta)
+inside(b, alpha)
+inside(a, beta)
+=>
+intersect(alpha, beta)
+
+circle-radii-equal
+
+circle alpha
+point a
+point b
+point c
+center(a, alpha)
+on(b, alpha)
+on(c, alpha)
+=>
+ab=ac
+
+segment-from-center-equal-to-radii-has-endpoint-on-circle
+
+circle alpha
+point a
+point b
+point c
+center(a, alpha)
+on(b, alpha)
+ab=ac
+=>
+on(c, alpha)
+
+Metric inferences:
+
+symmetry-of-segment:
+point a
+point b
+=> ab=ba
+
+Equality:
+
+reflexivity-of-equality: x=x
+substitutivity-of-equality: x=y -> [A(x) -> A(some x -> y)]
+
+---
+
+symmetry-of-equality:
+
+x=y
+=>
+y=x
+
+assume: x=y
+substitutivity(x,y,x=x): x=y -> [x=x -> y=x] aka ~(x=y) OR ~(x=x) OR y=x
+=> ~(x=x) OR y=x
+reflexivity: x=x
+=> y=x
+
+symmetry-of-negative-equality
+
+~(x=y)
+=>
+~(y=x)
+
+assume: ~(x=y)
+suppose: y=x
+then by symmetry(y=x): x=y
+=> contradiction
+=> ~(y=x)
+
+transitivity-of-equality:
+
+x=y
+y=z
+=>
+x=z
+
+assume: x=y, y=z
+substitutivity(y,x,y=z): y=x -> [y=z -> x=z] aka ~(y=x) OR ~(y=z) OR x=z
+symmetry(x=y): y=x
+=> ~(y=z) OR x=z
+=> x=z
+
+---
+
+prop I.1:
+
+point a
+point b
+~(a=b)
+=>
+point c
+ab=bc
+bc=ca
+
+0) assumptions
+
+point a
+point b
+~(a=b)
+
+0.5)
+
+symmetry-of-negative-equality(a,b):
+have: ~(a=b)
+=> ~(b=a)
+
+1) construct circle alpha w/ points a,b
+construct-circle(a,b,alpha)
+bind: a in rule to a in proof
+bind: b in rule to b in proof
+bind: alpha in rule to alpha in proof
+have: ~(a=b)
+
++ circle alpha
+=> center(a, alpha)
+=> on(b, alpha)
+
+2) construct circle beta w/ points b,a
+constuct-circle(b,a,beta)
+bind: a in rule to b in proof
+bind: b in rule to a in proof
+bind: alpha in rule to beta in proof
+have: ~(b=a)
+
++ circle beta
+=> center(b, beta)
+=> on(a, beta)
+
+2.5)
+
+infer center-inside(a, alpha):
+bind: a in rule to a in proof
+bind: alpha in rule to alpha in proof
+have: center(a, alpha)
+=> inside(a, alpha)
+
+infer center-inside(b, beta):
+have: center(b, beta)
+=> inside(b, beta)
+
+infer circles-intersect-mutual-in(alpha, beta, a, b):
+bind: alpha in rule to alpha in proof
+bind: beta in rule to beta in proof
+bind: a in rule to a in proof
+bind: b in rule to b in proof
+have: on(a, alpha)
+have: on(b, beta)
+have: inside(b, alpha)
+have: inside(a, beta)
+=> intersect(alpha, beta)
+
+3) construct intersection point c
+construct-circle-circle-intersection-point(alpha, beta, c)
+bind: alpha in rule to alpha in proof
+bind: beta in rule to beta in proof
+bind: a in rule to c in proof
+have: intersect(alpha, beta)
+=>
++ point c
+on(c, alpha)
+on(c, beta)
+
+4) ab=ac
+circle-radii-equal(alpha, a, b, c)
+have: center(a, alpha)
+have: on(b, alpha)
+have: on(c, alpha)
+=> ab=ac
+
+5) ba=bc
+circle-radii-equal(beta, b, a, c)
+have: center(b, beta)
+have: on(a, beta)
+have: on(c, beta)
+=> ba=bc
+
+5.5)
+
+symmetry-of-segment(a,b)
+=> ab=ba
+
+transitivity-of-equality(ab=ba,ba=bc):
+=> ab=bc *
+
+
+symmetry-of-segment(a,c)
+=> ac=ca
+
+transitivity-of-equality(ab=ac,ac=ca):
+=> ab=ca
+
+symmetry-of-equality(ab=bc):
+=> bc=ab
+
+transitivity-of-equality(bc=ab,ab=ca):
+=> bc=ca *
+
