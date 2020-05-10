@@ -1,12 +1,15 @@
 import { PointVariable } from './GeometricVariable';
 import { MetricSort } from './MetricSort';
 
+// TermType
 
 export enum MetricTermType {
   Addition = 'Addition',
   Constant = 'Constant',
   Measure = 'Measure',
 }
+
+// Base
 
 export type BaseMetric<TSort extends MetricSort, TTerm extends MetricTermType> = Readonly<{
   sort: TSort;
@@ -21,6 +24,7 @@ export type BaseConstant<TSort extends MetricSort> = BaseMetric<TSort, MetricTer
 
 export type BaseMeasure<TSort extends MetricSort> = BaseMetric<TSort, MetricTermType.Measure>;
 
+// Segment
 
 export type SegmentMetricAddition = BaseAddition<MetricSort.Segment> & Readonly<{
   segment1: SegmentMetric;
@@ -40,15 +44,16 @@ export type SegmentMetric
   | SegmentMetricMeasure
   ;
 
+// Angle
 
-export type AngleMetricAddition = BaseAddition<MetricSort.Segment> & Readonly<{
+export type AngleMetricAddition = BaseAddition<MetricSort.Angle> & Readonly<{
   angle1: AngleMetric;
   angle2: AngleMetric;
 }>;
 
 export type AngleMetricConstant = BaseConstant<MetricSort.Angle>;
 
-export type AngleMetricMeasure = BaseMeasure<MetricSort.Segment> & Readonly<{
+export type AngleMetricMeasure = BaseMeasure<MetricSort.Angle> & Readonly<{
   point1: PointVariable;
   point2: PointVariable;
   point3: PointVariable;
@@ -60,8 +65,9 @@ export type AngleMetric
   | AngleMetricMeasure
   ;
 
+// Area
 
-export type AreaMetricAddition = BaseAddition<MetricSort.Segment> & Readonly<{
+export type AreaMetricAddition = BaseAddition<MetricSort.Area> & Readonly<{
   area1: AreaMetric;
   area2: AreaMetric;
 }>;
@@ -80,6 +86,7 @@ export type AreaMetric
   | AreaMetricMeasure
   ;
 
+// Metric
 
 export type Metric
   = SegmentMetric

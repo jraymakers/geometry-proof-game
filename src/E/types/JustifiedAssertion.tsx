@@ -5,3 +5,5 @@ export type JustifiedAssertion = Readonly<{
   justification: Justification;
   assertions: AssertionList;
 }>;
+
+export type JustifiedAssertionList = readonly JustifiedAssertion[];

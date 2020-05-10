@@ -1,4 +1,5 @@
-import { Assertion, AssertionList } from './Assertion';
+import { Assertion } from './Assertion';
+import { JustifiedAssertionList } from './JustifiedAssertion';
 import { Theorem } from './Theorem';
 import { VariableRenameList } from './VariableRename';
 
@@ -32,18 +33,23 @@ export type ContradictionJustification = BaseJustification<JustificationType.Con
   contradiction: Justification;
 }>;
 
+export enum SuperpositionType {
+  SAS = 'SAS',
+  SSS = 'SSS',
+}
+
 export type SuperpositionJustification = BaseJustification<JustificationType.Superposition>
 & Readonly<{
-  superpositionType: 'sas' | 'sss';
+  superpositionType: SuperpositionType;
 }>;
 
 export type SuppositionJustification = BaseJustification<JustificationType.Supposition>;
 
 export type TheoremApplicationJustification = BaseJustification<JustificationType.TheoremApplication>
 & Readonly<{
-  justifiedAssumptions: AssertionList;
   theorem: Theorem;
-  renames: VariableRenameList;
+  renames: VariableRenameList; // applied to theorem
+  justifiedAntecedents: JustifiedAssertionList; // should match antecedents of renamed theorem
 }>;
 
 export type Justification
