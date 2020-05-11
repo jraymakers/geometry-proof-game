@@ -14,6 +14,7 @@ export const constructCircleTheorem = theorem(
   [
     relationAssertion(pointsAreEqual(pointAtCenter, pointOnCircle), false),
   ],
+  [newCircle],
   [
     relationAssertion(pointIsCenterOfCircle(pointAtCenter, newCircle)),
     relationAssertion(pointIsOnCircle(pointOnCircle, newCircle)),
@@ -25,6 +26,7 @@ export const constructCircleCircleIntersectionPointTheorem = theorem(
   [
     relationAssertion(circlesIntersect(circle1, circle2)),
   ],
+  [newPoint],
   [
     relationAssertion(pointIsOnCircle(newPoint, circle1)),
     relationAssertion(pointIsOnCircle(newPoint, circle2)),

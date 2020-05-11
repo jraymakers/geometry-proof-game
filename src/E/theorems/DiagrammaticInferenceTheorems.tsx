@@ -20,19 +20,21 @@ export const centerInsideTheorem = theorem(
   [
     relationAssertion(pointIsCenterOfCircle(pointAtCenter, circle1)),
   ],
+  [],
   [
     relationAssertion(pointIsInsideCircle(pointAtCenter, circle1)),
   ],
 );
 
 // Intersection Axioms #5
-export const circlesMutuallyInsideIntersect = theorem(
+export const circlesMutuallyInsideIntersectTheorem = theorem(
   [
     relationAssertion(pointIsOnCircle(pointOnCircle1, circle1)),
     relationAssertion(pointIsInsideCircle(pointInsideCircle1, circle1)),
     relationAssertion(pointIsOnCircle(pointOnCircle2, circle2)),
     relationAssertion(pointIsInsideCircle(pointInsideCircle2, circle2)),
   ],
+  [],
   [
     relationAssertion(circlesIntersect(circle1, circle2)),
   ],

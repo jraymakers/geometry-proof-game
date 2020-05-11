@@ -311,14 +311,14 @@ transitivity-of-equality(ab=ba,ba=bc):
 => ab=bc *
 
 
+symmetry-of-equality(ab=bc):
+=> bc=ab
+
 symmetry-of-segment(a,c)
 => ac=ca
 
 transitivity-of-equality(ab=ac,ac=ca):
 => ab=ca
-
-symmetry-of-equality(ab=bc):
-=> bc=ab
 
 transitivity-of-equality(bc=ab,ab=ca):
 => bc=ca *

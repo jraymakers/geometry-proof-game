@@ -1,5 +1,14 @@
 import { circle1, circle2, newCircle } from '../../E/constants/SemanticCircles';
 import {
+  newPoint,
+  point1,
+  point1OnCircle,
+  point2,
+  point3,
+  point4,
+  point5,
+  point6,
+  point2OnCircle,
   pointAtCenter,
   pointInsideCircle1,
   pointInsideCircle2,
@@ -16,20 +25,27 @@ import {
 import { pointsAreEqual, segmentsAreEqual } from '../../E/functions/RelationMakers';
 import { rename } from '../../E/functions/RenameMakers';
 import { theorem, theoremWithRenames } from '../../E/functions/TheoremMakers';
-import { constructCircleTheorem } from '../../E/theorems/ConstructionTheorems';
+import {
+  constructCircleCircleIntersectionPointTheorem,
+  constructCircleTheorem,
+} from '../../E/theorems/ConstructionTheorems';
 import {
   centerInsideTheorem,
-  circlesMutuallyInsideIntersect,
+  circlesMutuallyInsideIntersectTheorem,
 } from '../../E/theorems/DiagrammaticInferenceTheorems';
+import { segmentSymmetryTheorem } from '../../E/theorems/MetricInferenceTheorems';
+import { circleRadiiEqualTheorem } from '../../E/theorems/TransferInferenceTheorems';
 import { JustifiedAssertionReferences } from '../../E/types/JustifiedAssertion';
 import { circleAlpha, circleBeta } from '../constants/NamedCircles';
-import { pointA, pointB } from '../constants/NamedPoints';
+import { pointA, pointB, pointC } from '../constants/NamedPoints';
 import { segmentAB, segmentBC, segmentCA } from '../constants/NamedSegments';
+import { segmentEqualityTransitivityTheorem, segmentEqualitySymmetryTheorem } from '../../E/theorems/EqualityTheorems';
 
 export const BookIProp1 = theorem(
   [
     relationAssertion(pointsAreEqual(pointA, pointB), false),
   ],
+  [pointC],
   [
     relationAssertion(segmentsAreEqual(segmentAB, segmentBC)),
     relationAssertion(segmentsAreEqual(segmentBC, segmentCA)),
@@ -81,7 +97,7 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
   const pointBInsideBeta = justifiedAssertionReference(pointBInsideBetaStep, 0);
 
   const circlesAlphaBetaIntersectStep = applyTheorem(
-    theoremWithRenames(circlesMutuallyInsideIntersect, [
+    theoremWithRenames(circlesMutuallyInsideIntersectTheorem, [
       rename(pointInsideCircle1, pointA),
       rename(pointInsideCircle2, pointB),
       rename(pointOnCircle1, pointB),
@@ -94,9 +110,131 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
       pointAInsideAlpha,
       pointAOnBeta,
       pointBInsideBeta,
-    ]
+    ],
   );
   const circlesAlphaBetaIntersect = justifiedAssertionReference(circlesAlphaBetaIntersectStep, 0);
 
-  return [];
+  const constructAlphaBetaIntersectionPointStep = applyTheorem(
+    theoremWithRenames(constructCircleCircleIntersectionPointTheorem, [
+      rename(circle1, circleAlpha),
+      rename(circle1, circleBeta),
+      rename(newPoint, pointC),
+    ]),
+    [
+      circlesAlphaBetaIntersect,
+    ],
+  );
+  const pointCOnAlpha = justifiedAssertionReference(constructAlphaBetaIntersectionPointStep, 0);
+  const pointCOnBeta = justifiedAssertionReference(constructAlphaBetaIntersectionPointStep, 1);
+
+  const segmentABEqualsACStep = applyTheorem(
+    theoremWithRenames(circleRadiiEqualTheorem, [
+      rename(pointAtCenter, pointA),
+      rename(point1OnCircle, pointB),
+      rename(point2OnCircle, pointC),
+      rename(circle1, circleAlpha),
+    ]),
+    [
+      pointACenterOfAlpha,
+      pointBOnAlpha,
+      pointCOnAlpha,
+    ],
+  );
+  const segmentABEqualsAC = justifiedAssertionReference(segmentABEqualsACStep, 0);
+
+  const segmentBAEqualsBCStep = applyTheorem(
+    theoremWithRenames(circleRadiiEqualTheorem, [
+      rename(pointAtCenter, pointB),
+      rename(point1OnCircle, pointA),
+      rename(point2OnCircle, pointC),
+      rename(circle1, circleBeta),
+    ]),
+    [
+      pointBCenterOfBeta,
+      pointAOnBeta,
+      pointCOnBeta,
+    ],
+  );
+  const segmentBAEqualsBC = justifiedAssertionReference(segmentBAEqualsBCStep, 0);
+
+  const segmentABEqualsBAStep = applyTheorem(
+    theoremWithRenames(segmentSymmetryTheorem, [
+      rename(point1, pointA),
+      rename(point2, pointB),
+    ]),
+    [],
+  );
+  const segmentABEqualsBA = justifiedAssertionReference(segmentABEqualsBAStep, 0);
+
+  const segmentABEqualsBCStep = applyTheorem(
+    theoremWithRenames(segmentEqualityTransitivityTheorem, [
+      rename(point1, pointA),
+      rename(point2, pointB),
+      rename(point3, pointB),
+      rename(point4, pointA),
+      rename(point5, pointB),
+      rename(point6, pointC),
+    ]),
+    [
+      segmentABEqualsBA,
+      segmentBAEqualsBC,
+    ],
+  );
+  const segmentABEqualsBC = justifiedAssertionReference(segmentABEqualsBCStep, 0);
+
+  const segmentBCEqualsABStep = applyTheorem(
+    theoremWithRenames(segmentEqualitySymmetryTheorem, [
+      rename(point1, pointA),
+      rename(point2, pointB),
+      rename(point3, pointB),
+      rename(point4, pointC),
+    ]),
+    [
+      segmentABEqualsBC
+    ],
+  );
+  const segmentBCEqualsAB = justifiedAssertionReference(segmentBCEqualsABStep, 0);
+
+  const segmentACEqualsCAStep = applyTheorem(
+    theoremWithRenames(segmentSymmetryTheorem, [
+      rename(point1, pointA),
+      rename(point2, pointC),
+    ]),
+    [],
+  );
+  const segmentACEqualsCA = justifiedAssertionReference(segmentACEqualsCAStep, 0);
+
+  const segmentABEqualsCAStep = applyTheorem(
+    theoremWithRenames(segmentEqualityTransitivityTheorem, [
+      rename(point1, pointA),
+      rename(point2, pointB),
+      rename(point3, pointA),
+      rename(point4, pointC),
+      rename(point5, pointC),
+      rename(point6, pointA),
+    ]),
+    [
+      segmentABEqualsAC,
+      segmentACEqualsCA,
+    ],
+  );
+  const segmentABEqualsCA = justifiedAssertionReference(segmentABEqualsCAStep, 0);
+
+  const segmentBCEqualsCAStep = applyTheorem(
+    theoremWithRenames(segmentEqualityTransitivityTheorem, [
+      rename(point1, pointB),
+      rename(point2, pointC),
+      rename(point3, pointA),
+      rename(point4, pointB),
+      rename(point5, pointC),
+      rename(point6, pointA),
+    ]),
+    [
+      segmentBCEqualsAB,
+      segmentABEqualsCA,
+    ],
+  );
+  const segmentBCEqualsCA = justifiedAssertionReference(segmentBCEqualsCAStep, 0);
+
+  return [segmentABEqualsBC, segmentBCEqualsCA];
 }

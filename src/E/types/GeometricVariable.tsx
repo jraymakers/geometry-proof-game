@@ -16,3 +16,5 @@ export type GeometricVariable
   | LineVariable
   | CircleVariable
   ;
+
+export type GeometricVariableList = readonly GeometricVariable[];
