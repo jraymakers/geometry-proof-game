@@ -54,7 +54,7 @@ export const BookIProp1 = theorem(
 
 export function proveBookIProp1(): JustifiedAssertionReferences {
   const assumptions = assumeAll(BookIProp1.antecedents);
-  const equalPointsAB = justifiedAssertionReference(assumptions, 0);
+  const distinctPointsAB = justifiedAssertionReference(assumptions, 0);
 
   const constructCircleAlphaStep = applyTheorem(
     theoremWithRenames(constructCircleTheorem, [
@@ -62,7 +62,7 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
       rename(pointOnCircle, pointB),
       rename(newCircle, circleAlpha),
     ]),
-    [equalPointsAB],
+    [distinctPointsAB],
   );
   const pointACenterOfAlpha = justifiedAssertionReference(constructCircleAlphaStep, 0);
   const pointBOnAlpha = justifiedAssertionReference(constructCircleAlphaStep, 1);
@@ -73,7 +73,7 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
       rename(pointOnCircle, pointA),
       rename(newCircle, circleBeta),
     ]),
-    [equalPointsAB],
+    [distinctPointsAB],
   );
   const pointBCenterOfBeta = justifiedAssertionReference(constructCircleBetaStep, 0);
   const pointAOnBeta = justifiedAssertionReference(constructCircleBetaStep, 1);
