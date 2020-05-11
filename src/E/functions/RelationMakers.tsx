@@ -1,94 +1,94 @@
 import {
-  EqualAnglesRelation,
-  EqualAreasRelation,
-  EqualCirclesRelation,
-  EqualLinesRelation,
-  EqualPointsRelation,
-  EqualSegmentsRelation,
+  AnglesAreEqualRelation,
+  AreasAreEqualRelation,
+  CirclesAreEqualRelation,
+  LinesAreEqualRelation,
+  PointsAreEqualRelation,
+  SegmentsAreEqualRelation,
 } from '../types/EqualityRelation';
 import { CircleVariable, LineVariable, PointVariable } from '../types/GeometricVariable';
 import {
-  LessThanAnglesRelation,
-  LessThanAreaRelation,
-  LessThanSegmentRelation,
+  AngleLessThanAngleRelation,
+  AreaLessThanAreaRelation,
+  SegmentLessThanSegmentRelation,
 } from '../types/LessThanRelation';
 import { AngleMetric, AreaMetric, SegmentMetric } from '../types/Metric';
 import {
-  IntersectingCirclesRelation,
-  IntersectingLineAndCircleRelation,
-  IntersectingLinesRelation,
-  PointBetweenPointsRelation,
-  PointCenterOfCircleRelation,
-  PointInsideCircleRelation,
-  PointOnCircleRelation,
-  PointOnLineRelation,
-  PointsSameSideOfLineRelation,
+  CirclesIntersectRelation,
+  LineAndCircleIntersectRelation,
+  LinesIntersectRelation,
+  PointIsBetweenPointsRelation,
+  PointIsCenterOfCircleRelation,
+  PointIsInsideCircleRelation,
+  PointIsOnCircleRelation,
+  PointIsOnLineRelation,
+  PointsAreOnSameSideOfLineRelation,
 } from '../types/Relation';
 import { RelationType } from '../types/RelationType';
 
 // Equality
 
-export function equalPoints(
+export function pointsAreEqual(
   point1: PointVariable,
   point2: PointVariable,
-): EqualPointsRelation {
+): PointsAreEqualRelation {
   return {
-    relationType: RelationType.EqualPoints,
+    relationType: RelationType.PointsAreEqual,
     point1,
     point2,
   }
 }
 
-export function equalLines(
+export function linesAreEqual(
   line1: LineVariable,
   line2: LineVariable,
-): EqualLinesRelation {
+): LinesAreEqualRelation {
   return {
-    relationType: RelationType.EqualLines,
+    relationType: RelationType.LinesAreEqual,
     line1,
     line2,
   }
 }
 
-export function equalCircles(
+export function circlesAreEqual(
   circle1: CircleVariable,
   circle2: CircleVariable,
-): EqualCirclesRelation {
+): CirclesAreEqualRelation {
   return {
-    relationType: RelationType.EqualCircles,
+    relationType: RelationType.CirclesAreEqual,
     circle1,
     circle2,
   }
 }
 
-export function equalSegments(
+export function segmentsAreEqual(
   segment1: SegmentMetric,
   segment2: SegmentMetric,
-): EqualSegmentsRelation {
+): SegmentsAreEqualRelation {
   return {
-    relationType: RelationType.EqualSegments,
+    relationType: RelationType.SegmentsAreEqual,
     segment1,
     segment2,
   }
 }
 
-export function equalAngles(
+export function anglesAreEqual(
   angle1: AngleMetric,
   angle2: AngleMetric,
-): EqualAnglesRelation {
+): AnglesAreEqualRelation {
   return {
-    relationType: RelationType.EqualAngles,
+    relationType: RelationType.AnglesAreEqual,
     angle1,
     angle2,
   }
 }
 
-export function equalAreas(
+export function areasAreEqual(
   area1: AreaMetric,
   area2: AreaMetric,
-): EqualAreasRelation {
+): AreasAreEqualRelation {
   return {
-    relationType: RelationType.EqualAreas,
+    relationType: RelationType.AreasAreEqual,
     area1,
     area2,
   }
@@ -96,34 +96,34 @@ export function equalAreas(
 
 // LessThan
 
-export function lessThanSegment(
+export function segmentLessThanSegment(
   segment1: SegmentMetric,
   segment2: SegmentMetric,
-): LessThanSegmentRelation {
+): SegmentLessThanSegmentRelation {
   return {
-    relationType: RelationType.LessThanSegment,
+    relationType: RelationType.SegmentLessThanSegment,
     segment1,
     segment2,
   }
 }
 
-export function lessThanAngle(
+export function angleLessThanAngle(
   angle1: AngleMetric,
   angle2: AngleMetric,
-): LessThanAnglesRelation {
+): AngleLessThanAngleRelation {
   return {
-    relationType: RelationType.LessThanAngle,
+    relationType: RelationType.AngleLessThanAngle,
     angle1,
     angle2,
   }
 }
 
-export function lessThanArea(
+export function areaLessThanArea(
   area1: AreaMetric,
   area2: AreaMetric,
-): LessThanAreaRelation {
+): AreaLessThanAreaRelation {
   return {
-    relationType: RelationType.LessThanArea,
+    relationType: RelationType.AreaLessThanArea,
     area1,
     area2,
   }
@@ -131,104 +131,104 @@ export function lessThanArea(
 
 // Other
 
-export function pointOnLine(
+export function pointIsOnLine(
   point: PointVariable,
   line: LineVariable,
-): PointOnLineRelation {
+): PointIsOnLineRelation {
   return {
-    relationType: RelationType.PointOnLine,
+    relationType: RelationType.PointIsOnLine,
     point,
     line,
   }
 }
 
-export function pointsSameSideOfLine(
+export function pointsAreOnSameSideOfLine(
   point1: PointVariable,
   point2: PointVariable,
   line: LineVariable,
-): PointsSameSideOfLineRelation {
+): PointsAreOnSameSideOfLineRelation {
   return {
-    relationType: RelationType.PointsSameSideOfLine,
+    relationType: RelationType.PointsAreOnSameSideOfLine,
     point1,
     point2,
     line,
   }
 }
 
-export function pointBetweenPoints(
+export function pointIsBetweenPoints(
   point1: PointVariable,
   point2: PointVariable,
   point3: PointVariable,
-): PointBetweenPointsRelation {
+): PointIsBetweenPointsRelation {
   return {
-    relationType: RelationType.PointBetweenPoints,
+    relationType: RelationType.PointIsBetweenPoints,
     point1,
     point2,
     point3,
   }
 }
 
-export function pointOnCircle(
+export function pointIsOnCircle(
   point: PointVariable,
   circle: CircleVariable,
-): PointOnCircleRelation {
+): PointIsOnCircleRelation {
   return {
-    relationType: RelationType.PointOnCircle,
+    relationType: RelationType.PointIsOnCircle,
     point,
     circle,
   }
 }
 
-export function pointInsideCircle(
+export function pointIsInsideCircle(
   point: PointVariable,
   circle: CircleVariable,
-): PointInsideCircleRelation {
+): PointIsInsideCircleRelation {
   return {
-    relationType: RelationType.PointInsideCircle,
+    relationType: RelationType.PointIsInsideCircle,
     point,
     circle,
   }
 }
 
-export function pointCenterOfCircle(
+export function pointIsCenterOfCircle(
   point: PointVariable,
   circle: CircleVariable,
-): PointCenterOfCircleRelation {
+): PointIsCenterOfCircleRelation {
   return {
-    relationType: RelationType.PointCenterOfCircle,
+    relationType: RelationType.PointIsCenterOfCircle,
     point,
     circle,
   }
 }
 
-export function intersectingLines(
+export function linesIntersect(
   line1: LineVariable,
   line2: LineVariable,
-): IntersectingLinesRelation {
+): LinesIntersectRelation {
   return {
-    relationType: RelationType.IntersectingLines,
+    relationType: RelationType.LinesIntersect,
     line1,
     line2,
   }
 }
 
-export function intersectingCircles(
+export function circlesIntersect(
   circle1: CircleVariable,
   circle2: CircleVariable,
-): IntersectingCirclesRelation {
+): CirclesIntersectRelation {
   return {
-    relationType: RelationType.IntersectingCircles,
+    relationType: RelationType.CirclesIntersect,
     circle1,
     circle2,
   }
 }
 
-export function intersectingLineAndCircle(
+export function lineAndCircleIntersect(
   line: LineVariable,
   circle: CircleVariable,
-): IntersectingLineAndCircleRelation {
+): LineAndCircleIntersectRelation {
   return {
-    relationType: RelationType.IntersectingLineAndCircle,
+    relationType: RelationType.LineAndCircleIntersect,
     line,
     circle,
   }

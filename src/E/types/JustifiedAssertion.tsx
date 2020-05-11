@@ -1,9 +1,14 @@
 import { AssertionList } from './Assertion';
 import { Justification } from './Justification';
 
-export type JustifiedAssertion = Readonly<{
+export type JustifiedAssertions = Readonly<{
   justification: Justification;
   assertions: AssertionList;
 }>;
 
-export type JustifiedAssertionList = readonly JustifiedAssertion[];
+export type JustifiedAssertionReference = Readonly<{
+  justifiedAssertions: JustifiedAssertions;
+  index: number;
+}>;
+
+export type JustifiedAssertionReferences = readonly JustifiedAssertionReference[];

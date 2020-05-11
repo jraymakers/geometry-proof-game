@@ -5,14 +5,13 @@ import {
   ContradictionJustification,
   Justification,
   JustificationType,
-  SuppositionJustification,
   SuperpositionJustification,
   SuperpositionType,
+  SuppositionJustification,
   TheoremApplicationJustification,
 } from '../types/Justification';
-import { JustifiedAssertionList } from '../types/JustifiedAssertion';
-import { Theorem } from '../types/Theorem';
-import { VariableRenameList } from '../types/VariableRename';
+import { JustifiedAssertionReferences } from '../types/JustifiedAssertion';
+import { TheoremWithRenames } from '../types/Theorem';
 
 export const assumptionJustification: AssumptionJustification = {
   justificationType: JustificationType.Assumption,
@@ -56,14 +55,12 @@ export const suppositionJustification: SuppositionJustification = {
 };
 
 export function theoremApplicationJustification(
-  theorem: Theorem,
-  renames: VariableRenameList,
-  justifiedAntecedents: JustifiedAssertionList,
+  theorem: TheoremWithRenames,
+  justifiedAntecedents: JustifiedAssertionReferences,
 ): TheoremApplicationJustification {
   return {
     justificationType: JustificationType.TheoremApplication,
     theorem,
-    renames,
     justifiedAntecedents,
   };
 }

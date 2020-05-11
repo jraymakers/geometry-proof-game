@@ -1,5 +1,6 @@
 import { AssertionList } from '../types/Assertion';
-import { Theorem } from '../types/Theorem';
+import { Theorem, TheoremWithRenames } from '../types/Theorem';
+import { VariableRenameList } from '../types/VariableRename';
 
 export function theorem(
   antecedents: AssertionList,
@@ -8,5 +9,15 @@ export function theorem(
   return {
     antecedents,
     consequents,
+  };
+}
+
+export function theoremWithRenames(
+  theorem: Theorem,
+  renames: VariableRenameList = [],
+): TheoremWithRenames {
+  return {
+    theorem,
+    renames,
   };
 }

@@ -1,7 +1,6 @@
 import { Assertion } from './Assertion';
-import { JustifiedAssertionList } from './JustifiedAssertion';
-import { Theorem } from './Theorem';
-import { VariableRenameList } from './VariableRename';
+import { JustifiedAssertionReferences } from './JustifiedAssertion';
+import { TheoremWithRenames } from './Theorem';
 
 export enum JustificationType {
   Assumption = 'Assumption',
@@ -47,9 +46,8 @@ export type SuppositionJustification = BaseJustification<JustificationType.Suppo
 
 export type TheoremApplicationJustification = BaseJustification<JustificationType.TheoremApplication>
 & Readonly<{
-  theorem: Theorem;
-  renames: VariableRenameList; // applied to theorem
-  justifiedAntecedents: JustifiedAssertionList; // should match antecedents of renamed theorem
+  theorem: TheoremWithRenames;
+  justifiedAntecedents: JustifiedAssertionReferences; // should match antecedents of renamed theorem
 }>;
 
 export type Justification

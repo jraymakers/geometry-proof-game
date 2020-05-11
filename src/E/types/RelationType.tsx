@@ -1,25 +1,25 @@
 export enum RelationType {
-  EqualPoints = 'EqualPoints',
-  EqualLines = 'EqualLines',
-  EqualCircles = 'EqualCircles',
-  EqualSegments = 'EqualSegments',
-  EqualAngles = 'EqualAngles',
-  EqualAreas = 'EqualAreas',
+  PointsAreEqual = 'PointsAreEqual',
+  LinesAreEqual = 'LinesAreEqual',
+  CirclesAreEqual = 'CirclesAreEqual',
+  SegmentsAreEqual = 'SegmentsAreEqual',
+  AnglesAreEqual = 'AnglesAreEqual',
+  AreasAreEqual = 'AreasAreEqual',
 
-  LessThanSegment = 'LessThanSegment',
-  LessThanAngle = 'LessThanAngle',
-  LessThanArea = 'LessThanArea',
+  SegmentLessThanSegment = 'SegmentLessThanSegment',
+  AngleLessThanAngle = 'AngleLessThanAngle',
+  AreaLessThanArea = 'AreaLessThanArea',
 
-  PointOnLine = 'PointOnLine',
-  PointsSameSideOfLine = 'PointsSameSideOfLine',
-  PointBetweenPoints = 'PointBetweenPoints',
-  PointOnCircle = 'PointOnCircle',
-  PointInsideCircle = 'PointInsideCircle',
-  PointCenterOfCircle = 'PointCenterOfCircle',
+  PointIsOnLine = 'PointIsOnLine',
+  PointsAreOnSameSideOfLine = 'PointsAreOnSameSideOfLine',
+  PointIsBetweenPoints = 'PointIsBetweenPoints',
+  PointIsOnCircle = 'PointIsOnCircle',
+  PointIsInsideCircle = 'PointIsInsideCircle',
+  PointIsCenterOfCircle = 'PointIsCenterOfCircle',
 
-  IntersectingLines = 'IntersectingLines',
-  IntersectingCircles = 'IntersectingCircles',
-  IntersectingLineAndCircle = 'IntersectingLineAndCircle',
+  LinesIntersect = 'LinesIntersect',
+  CirclesIntersect = 'CirclesIntersect',
+  LineAndCircleIntersect = 'LineAndCircleIntersect',
 }
 
 export type BaseRelationType<TRelation extends RelationType> = Readonly<{

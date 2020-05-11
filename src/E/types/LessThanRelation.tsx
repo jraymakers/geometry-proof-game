@@ -1,23 +1,29 @@
 import { AngleMetric, AreaMetric, SegmentMetric } from './Metric';
 import { BaseRelationType, RelationType } from './RelationType';
 
-export type LessThanSegmentRelation = BaseRelationType<RelationType.LessThanSegment> & Readonly<{
+export type SegmentLessThanSegmentRelation
+= BaseRelationType<RelationType.SegmentLessThanSegment>
+& Readonly<{
   segment1: SegmentMetric;
   segment2: SegmentMetric;
 }>;
 
-export type LessThanAnglesRelation = BaseRelationType<RelationType.LessThanAngle> & Readonly<{
+export type AngleLessThanAngleRelation
+= BaseRelationType<RelationType.AngleLessThanAngle>
+& Readonly<{
   angle1: AngleMetric;
   angle2: AngleMetric;
 }>;
 
-export type LessThanAreaRelation = BaseRelationType<RelationType.LessThanArea> & Readonly<{
+export type AreaLessThanAreaRelation
+= BaseRelationType<RelationType.AreaLessThanArea>
+& Readonly<{
   area1: AreaMetric;
   area2: AreaMetric;
 }>;
 
 export type LessThanRelation
-  = LessThanSegmentRelation
-  | LessThanAnglesRelation
-  | LessThanAreaRelation
+  = SegmentLessThanSegmentRelation
+  | AngleLessThanAngleRelation
+  | AreaLessThanAreaRelation
   ;
