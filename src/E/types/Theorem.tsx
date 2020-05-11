@@ -1,6 +1,6 @@
 import { AssertionList } from './Assertion';
-import { VariableRenameList } from './VariableRename';
 import { GeometricVariableList } from './GeometricVariable';
+import { VariableRenameList } from './VariableRename';
 
 export type Theorem = Readonly<{
   antecedents: AssertionList;

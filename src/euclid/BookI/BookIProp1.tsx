@@ -4,11 +4,11 @@ import {
   point1,
   point1OnCircle,
   point2,
+  point2OnCircle,
   point3,
   point4,
   point5,
   point6,
-  point2OnCircle,
   pointAtCenter,
   pointInsideCircle1,
   pointInsideCircle2,
@@ -33,13 +33,16 @@ import {
   centerInsideTheorem,
   circlesMutuallyInsideIntersectTheorem,
 } from '../../E/theorems/DiagrammaticInferenceTheorems';
+import {
+  segmentEqualitySymmetryTheorem,
+  segmentEqualityTransitivityTheorem,
+} from '../../E/theorems/EqualityTheorems';
 import { segmentSymmetryTheorem } from '../../E/theorems/MetricInferenceTheorems';
 import { circleRadiiEqualTheorem } from '../../E/theorems/TransferInferenceTheorems';
 import { JustifiedAssertionReferences } from '../../E/types/JustifiedAssertion';
 import { circleAlpha, circleBeta } from '../constants/NamedCircles';
 import { pointA, pointB, pointC } from '../constants/NamedPoints';
 import { segmentAB, segmentBC, segmentCA } from '../constants/NamedSegments';
-import { segmentEqualityTransitivityTheorem, segmentEqualitySymmetryTheorem } from '../../E/theorems/EqualityTheorems';
 
 export const BookIProp1 = theorem(
   [

@@ -1,10 +1,5 @@
 import { PointVariable } from '../types/GeometricVariable';
 import {
-  MetricTermType,
-  SegmentMetric,
-  SegmentMetricAddition,
-  SegmentMetricConstant,
-  SegmentMetricMeasure,
   AngleMetric,
   AngleMetricAddition,
   AngleMetricConstant,
@@ -13,6 +8,11 @@ import {
   AreaMetricAddition,
   AreaMetricConstant,
   AreaMetricMeasure,
+  MetricTermType,
+  SegmentMetric,
+  SegmentMetricAddition,
+  SegmentMetricConstant,
+  SegmentMetricMeasure,
 } from '../types/Metric';
 import { MetricSort } from '../types/MetricSort';
 

@@ -1,7 +1,7 @@
 import { AssertionList } from '../types/Assertion';
+import { GeometricVariableList } from '../types/GeometricVariable';
 import { Theorem, TheoremWithRenames } from '../types/Theorem';
 import { VariableRenameList } from '../types/VariableRename';
-import { GeometricVariableList } from '../types/GeometricVariable';
 
 export function theorem(
   antecedents: AssertionList,

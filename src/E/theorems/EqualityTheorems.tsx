@@ -1,7 +1,7 @@
 import { segment12, segment34, segment56 } from '../constants/SemanticSegments';
-import { theorem } from '../functions/TheoremMakers';
 import { relationAssertion } from '../functions/AssertionMakers';
 import { segmentsAreEqual } from '../functions/RelationMakers';
+import { theorem } from '../functions/TheoremMakers';
 
 export const segmentEqualitySymmetryTheorem = theorem(
   [

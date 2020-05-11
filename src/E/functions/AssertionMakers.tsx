@@ -1,4 +1,4 @@
-import { ContradictionAssertion, AssertionType, RelationAssertion } from '../types/Assertion';
+import { AssertionType, ContradictionAssertion, RelationAssertion } from '../types/Assertion';
 import { Relation } from '../types/Relation';
 
 export const contradictionAssertion: ContradictionAssertion = {
