@@ -11,6 +11,7 @@ import { theorem } from '../functions/TheoremMakers';
 
 // Lines and Circles #2
 export const constructCircleTheorem = theorem(
+  'Construct circle',
   [
     relationAssertion(pointsAreEqual(pointAtCenter, pointOnCircle), false),
   ],
@@ -23,6 +24,7 @@ export const constructCircleTheorem = theorem(
 
 // Intersections #6
 export const constructCircleCircleIntersectionPointTheorem = theorem(
+  'Construct circle/circle intersection point',
   [
     relationAssertion(circlesIntersect(circle1, circle2)),
   ],

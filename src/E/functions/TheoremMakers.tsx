@@ -4,11 +4,13 @@ import { Theorem, TheoremWithRenames } from '../types/Theorem';
 import { VariableRenameList } from '../types/VariableRename';
 
 export function theorem(
+  name: string,
   antecedents: AssertionList,
   newVariables: GeometricVariableList,
   consequents: AssertionList,
 ): Theorem {
   return {
+    name,
     antecedents,
     newVariables,
     consequents,

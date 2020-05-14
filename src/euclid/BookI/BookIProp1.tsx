@@ -45,6 +45,7 @@ import { pointA, pointB, pointC } from '../constants/NamedPoints';
 import { segmentAB, segmentBC, segmentCA } from '../constants/NamedSegments';
 
 export const BookIProp1 = theorem(
+  'I.1',
   [
     relationAssertion(pointsAreEqual(pointA, pointB), false),
   ],

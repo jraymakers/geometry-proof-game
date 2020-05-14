@@ -17,6 +17,7 @@ import { theorem } from '../functions/TheoremMakers';
 
 // Generalities #3
 export const centerInsideTheorem = theorem(
+  'Center inside',
   [
     relationAssertion(pointIsCenterOfCircle(pointAtCenter, circle1)),
   ],
@@ -28,6 +29,7 @@ export const centerInsideTheorem = theorem(
 
 // Intersection Axioms #5
 export const circlesMutuallyInsideIntersectTheorem = theorem(
+  'Circles mutally inside intersect',
   [
     relationAssertion(pointIsOnCircle(pointOnCircle1, circle1)),
     relationAssertion(pointIsInsideCircle(pointInsideCircle1, circle1)),

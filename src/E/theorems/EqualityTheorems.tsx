@@ -4,6 +4,7 @@ import { segmentsAreEqual } from '../functions/RelationMakers';
 import { theorem } from '../functions/TheoremMakers';
 
 export const segmentEqualitySymmetryTheorem = theorem(
+  'Segment equality symmetry',
   [
     relationAssertion(segmentsAreEqual(segment12, segment34)),
   ],
@@ -14,6 +15,7 @@ export const segmentEqualitySymmetryTheorem = theorem(
 );
 
 export const segmentEqualityTransitivityTheorem = theorem(
+  'Segment equality transitivity',
   [
     relationAssertion(segmentsAreEqual(segment12, segment34)),
     relationAssertion(segmentsAreEqual(segment34, segment56)),

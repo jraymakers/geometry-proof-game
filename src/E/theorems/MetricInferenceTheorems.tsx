@@ -6,6 +6,7 @@ import { theorem } from '../functions/TheoremMakers';
 
 // #3: ab=ba
 export const segmentSymmetryTheorem = theorem(
+  'Segment symmetry',
   [],
   [],
   [

@@ -11,6 +11,7 @@ import { theorem } from '../functions/TheoremMakers';
 
 // Diagram-Segment Transfer Axioms #3 (forward)
 export const circleRadiiEqualTheorem = theorem(
+  'Circle radii equal',
   [
     relationAssertion(pointIsCenterOfCircle(pointAtCenter, circle1)),
     relationAssertion(pointIsOnCircle(point1OnCircle, circle1)),
