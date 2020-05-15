@@ -4,15 +4,17 @@ import { GeometricVariable } from '../../E/types/GeometricVariable';
 
 export const GeometricVariableView: React.FC<{
   variable: GeometricVariable;
+  withSort?: boolean;
 }> = ({
   variable,
+  withSort,
 }) => {
   const {
     sort,
     name,
   } = variable;
   return (
-    <span><span>{sort}</span> <span>{name}</span></span>
+    <span>{name}{withSort ? `[${sort}]` : null}</span>
   );
 }
 GeometricVariableView.displayName = 'GeometricVariableView';

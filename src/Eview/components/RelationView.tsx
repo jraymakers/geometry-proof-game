@@ -1,8 +1,22 @@
 import * as React from 'react';
 
+import { GeometricVariable } from '../../E/types/GeometricVariable';
+import {
+  AngleMetric,
+  AreaMetric,
+  Metric,
+  MetricTermType,
+  SegmentMetric,
+} from '../../E/types/Metric';
 import { Relation } from '../../E/types/Relation';
 import { RelationType } from '../../E/types/RelationType';
-import { SegmentMetric, MetricTermType } from '../../E/types/Metric';
+import { MetricSort } from '../../E/types/MetricSort';
+import { GeometricVariableView } from './GeometricVariableView';
+import { cssClass } from '../../style';
+
+const segmentClass = cssClass('SegmentView', 'root', {
+  textDecoration: 'overline',
+});
 
 export const RelationView: React.FC<{
   relation: Relation;
@@ -11,138 +25,258 @@ export const RelationView: React.FC<{
 }) => {
   switch (relation.relationType) {
     case RelationType.PointsAreEqual:
-      return <EqualRelationView op1={<span>{relation.point1.name}</span>} op2={<span>{relation.point2.name}</span>} />;
+      return (
+        <BinaryInfixVariableRelationView
+          symbol='='
+          v1={relation.point1}
+          v2={relation.point2}
+        />
+      );
     case RelationType.LinesAreEqual:
-      return <EqualRelationView op1={<span>{relation.line1.name}</span>} op2={<span>{relation.line2.name}</span>} />;
+      return (
+        <BinaryInfixVariableRelationView
+          symbol='='
+          v1={relation.line1}
+          v2={relation.line2}
+        />
+      );
     case RelationType.CirclesAreEqual:
-      return <EqualRelationView op1={<span>{relation.circle1.name}</span>} op2={<span>{relation.circle2.name}</span>} />;
+      return (
+        <BinaryInfixVariableRelationView
+          symbol='='
+          v1={relation.circle1}
+          v2={relation.circle2}
+        />
+      );
     case RelationType.SegmentsAreEqual:
-      return <EqualRelationView op1={<SegmentView segment={relation.segment1} />} op2={<SegmentView segment={relation.segment2} />} />;
+      return (
+        <BinaryInfixMetricRelationView
+          symbol='='
+          m1={relation.segment1}
+          m2={relation.segment2}
+        />
+      );
     case RelationType.AnglesAreEqual:
-      return <EqualRelationView op1={<span>{relation.angle1.sort}</span>} op2={<span>{relation.angle2.sort}</span>} />;
+      return (
+        <BinaryInfixMetricRelationView
+          symbol='='
+          m1={relation.angle1}
+          m2={relation.angle2}
+        />
+      );
     case RelationType.AreasAreEqual:
-      return <EqualRelationView op1={<span>{relation.area1.sort}</span>} op2={<span>{relation.area2.sort}</span>} />;
+      return (
+        <BinaryInfixMetricRelationView
+          symbol='='
+          m1={relation.area1}
+          m2={relation.area2}
+        />
+      );
       
     case RelationType.SegmentLessThanSegment:
-      return <LessThanRelationView name1={relation.segment1.sort} name2={relation.segment2.sort} />;
+      return (
+        <BinaryInfixMetricRelationView
+          symbol='<'
+          m1={relation.segment1}
+          m2={relation.segment2}
+        />
+      );
     case RelationType.AngleLessThanAngle:
-      return <LessThanRelationView name1={relation.angle1.sort} name2={relation.angle2.sort} />;
+      return (
+        <BinaryInfixMetricRelationView
+          symbol='<'
+          m1={relation.angle1}
+          m2={relation.angle2}
+        />
+      );
     case RelationType.AreaLessThanArea:
-      return <LessThanRelationView name1={relation.area1.sort} name2={relation.area2.sort} />;
+      return (
+        <BinaryInfixMetricRelationView
+          symbol='<'
+          m1={relation.area1}
+          m2={relation.area2}
+        />
+      );
 
     case RelationType.PointIsOnLine:
-      return <BinaryRelationView relationName={'on-line'}
-        name1={relation.point.name} name2={relation.line.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'on-line'}
+          v1={relation.point}
+          v2={relation.line}
+        />
+      );
     case RelationType.PointsAreOnSameSideOfLine:
-      return <TernaryRelationView relationName={'same-side'}
-        name1={relation.point1.name} name2={relation.point2.name} name3={relation.line.name} />;
+      return (
+        <TernaryPrefixVariableRelationView
+          name={'same-side'}
+          v1={relation.point1}
+          v2={relation.point2}
+          v3={relation.line}
+        />
+      );
     case RelationType.PointIsBetweenPoints:
-      return <TernaryRelationView relationName={'between'}
-        name1={relation.point1.name} name2={relation.point2.name} name3={relation.point3.name} />;
+      return (
+        <TernaryPrefixVariableRelationView
+          name={'between'}
+          v1={relation.point1}
+          v2={relation.point2}
+          v3={relation.point3}
+        />
+      );
     case RelationType.PointIsOnCircle:
-      return <BinaryRelationView relationName={'on-circle'}
-        name1={relation.point.name} name2={relation.circle.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'on-circle'}
+          v1={relation.point}
+          v2={relation.circle}
+        />
+      );
     case RelationType.PointIsInsideCircle:
-      return <BinaryRelationView relationName={'inside'}
-        name1={relation.point.name} name2={relation.circle.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'inside'}
+          v1={relation.point}
+          v2={relation.circle}
+        />
+      );
     case RelationType.PointIsCenterOfCircle:
-      return <BinaryRelationView relationName={'center'}
-        name1={relation.point.name} name2={relation.circle.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'center'}
+          v1={relation.point}
+          v2={relation.circle}
+        />
+      );
 
     case RelationType.LinesIntersect:
-      return <BinaryRelationView relationName={'lines-intersect'}
-        name1={relation.line1.name} name2={relation.line2.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'lines-intersect'}
+          v1={relation.line1}
+          v2={relation.line2}
+        />
+      );
     case RelationType.CirclesIntersect:
-      return <BinaryRelationView relationName={'circles-intersect'}
-        name1={relation.circle1.name} name2={relation.circle2.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'circles-intersect'}
+          v1={relation.circle1}
+          v2={relation.circle2}
+        />
+      );
     case RelationType.LineAndCircleIntersect:
-      return <BinaryRelationView relationName={'line-circle-intersect'}
-        name1={relation.line.name} name2={relation.circle.name} />;
+      return (
+        <BinaryPrefixVariableRelationView
+          name={'line-circle-intersect'}
+          v1={relation.line}
+          v2={relation.circle}
+        />
+      );
   }
 }
 RelationView.displayName = 'RelationView';
 
-export const EqualRelationView: React.FC<{
-  op1: React.ReactElement;
-  op2: React.ReactElement;
+export const BinaryInfixVariableRelationView: React.FC<{
+  symbol: string;
+  v1: GeometricVariable;
+  v2: GeometricVariable;
 }> = ({
-  op1,
-  op2,
+  symbol,
+  v1,
+  v2,
 }) => {
   return (
     <span>
-      <span>{op1}</span>
-      <span>{'='}</span>
-      <span>{op2}</span>
+      <GeometricVariableView variable={v1} />
+      <span>{symbol}</span>
+      <GeometricVariableView variable={v2} />
     </span>
   );
 }
-EqualRelationView.displayName = 'EqualRelationView';
+BinaryInfixVariableRelationView.displayName = 'BinaryInfixVariableRelationView';
 
-export const LessThanRelationView: React.FC<{
-  name1: string;
-  name2: string;
+export const BinaryInfixMetricRelationView: React.FC<{
+  symbol: string;
+  m1: Metric;
+  m2: Metric;
 }> = ({
-  name1,
-  name2,
+  symbol,
+  m1,
+  m2,
 }) => {
   return (
     <span>
-      <span>{name1}</span>
-      <span>{'<'}</span>
-      <span>{name2}</span>
+      <MetricView metric={m1} />
+      <span>{symbol}</span>
+      <MetricView metric={m2} />
     </span>
   );
 }
-LessThanRelationView.displayName = 'LessThanRelationView';
+BinaryInfixMetricRelationView.displayName = 'BinaryInfixMetricRelationView';
 
-export const BinaryRelationView: React.FC<{
-  relationName: string;
-  name1: string;
-  name2: string;
+export const BinaryPrefixVariableRelationView: React.FC<{
+  name: string;
+  v1: GeometricVariable;
+  v2: GeometricVariable;
 }> = ({
-  relationName,
-  name1,
-  name2,
+  name,
+  v1,
+  v2,
 }) => {
   return (
     <span>
-      <span>{relationName}</span>
+      <span>{name}</span>
       <span>(</span>
-      <span>{name1}</span>
+      <GeometricVariableView variable={v1} />
       <span>,</span>
-      <span>{name2}</span>
+      <GeometricVariableView variable={v2} />
       <span>)</span>
     </span>
   );
 }
-BinaryRelationView.displayName = 'BinaryRelationView';
+BinaryPrefixVariableRelationView.displayName = 'BinaryPrefixVariableRelationView';
 
-export const TernaryRelationView: React.FC<{
-  relationName: string;
-  name1: string;
-  name2: string;
-  name3: string;
+export const TernaryPrefixVariableRelationView: React.FC<{
+  name: string;
+  v1: GeometricVariable;
+  v2: GeometricVariable;
+  v3: GeometricVariable;
 }> = ({
-  relationName,
-  name1,
-  name2,
-  name3,
+  name,
+  v1,
+  v2,
+  v3,
 }) => {
   return (
     <span>
-      <span>{relationName}</span>
+      <span>{name}</span>
       <span>(</span>
-      <span>{name1}</span>
+      <GeometricVariableView variable={v1} />
       <span>,</span>
-      <span>{name2}</span>
+      <GeometricVariableView variable={v2} />
       <span>,</span>
-      <span>{name3}</span>
+      <GeometricVariableView variable={v3} />
       <span>)</span>
     </span>
   );
 }
-TernaryRelationView.displayName = 'TernaryRelationView';
+TernaryPrefixVariableRelationView.displayName = 'TernaryPrefixVariableRelationView';
+
+export const MetricView: React.FC<{
+  metric: Metric;
+}> = ({
+  metric,
+}) => {
+  switch (metric.sort) {
+    case MetricSort.Angle:
+      return <AngleView angle={metric} />;
+    case MetricSort.Area:
+      return <AreaView area={metric} />;
+    case MetricSort.Segment:
+      return <SegmentView segment={metric} />;
+  }
+}
 
 export const SegmentView: React.FC<{
   segment: SegmentMetric;
@@ -159,18 +293,80 @@ export const SegmentView: React.FC<{
         </span>
       );
     case MetricTermType.Constant:
-      return <span>segment.name</span>;
+      return <span>{segment.name}</span>;
     case MetricTermType.Measure:
       return (
-        <span>
-          <span>{'segment'}</span>
-          <span>(</span>
-          <span>{segment.point1.name}</span>
-          <span>,</span>
-          <span>{segment.point2.name}</span>
-          <span>)</span>
+        <span className={segmentClass}>
+          {segment.point1.name}
+          {segment.point2.name}
         </span>
       );
   }
 }
 SegmentView.displayName = 'SegmentView';
+
+export const AngleView: React.FC<{
+  angle: AngleMetric;
+}> = ({
+  angle,
+}) => {
+  switch (angle.termType) {
+    case MetricTermType.Addition:
+      return (
+        <span>
+          <AngleView angle={angle.angle1} />
+          <span>{'+'}</span>
+          <AngleView angle={angle.angle2} />
+        </span>
+      );
+    case MetricTermType.Constant:
+      return <span>{angle.name}</span>;
+    case MetricTermType.Measure:
+      return (
+        <span>
+          <span>{'angle'}</span>
+          <span>(</span>
+          <span>{angle.point1.name}</span>
+          <span>,</span>
+          <span>{angle.point2.name}</span>
+          <span>,</span>
+          <span>{angle.point3.name}</span>
+          <span>)</span>
+        </span>
+      );
+  }
+}
+AngleView.displayName = 'AngleView';
+
+export const AreaView: React.FC<{
+  area: AreaMetric;
+}> = ({
+  area,
+}) => {
+  switch (area.termType) {
+    case MetricTermType.Addition:
+      return (
+        <span>
+          <AreaView area={area.area1} />
+          <span>{'+'}</span>
+          <AreaView area={area.area2} />
+        </span>
+      );
+    case MetricTermType.Constant:
+      return <span>{area.name}</span>;
+    case MetricTermType.Measure:
+      return (
+        <span>
+          <span>{'area'}</span>
+          <span>(</span>
+          <span>{area.point1.name}</span>
+          <span>,</span>
+          <span>{area.point2.name}</span>
+          <span>,</span>
+          <span>{area.point3.name}</span>
+          <span>)</span>
+        </span>
+      );
+  }
+}
+AreaView.displayName = 'AreaView';

@@ -17,21 +17,20 @@ export const TheoremView: React.FC<{
   } = theorem;
   return (
     <div>
-      <div>Theorem: {name}</div>
-      <div>{antecedents.map((assertion, index) =>
-        <div key={index}><AssertionView assertion={assertion} /></div>
-      )}</div>
-      <div>{'=>'}</div>
-
-      <div>
-        {newVariables.length > 0 ? '∃ ' : null}
-        {newVariables.map((variable, index) =>
-          <span key={index}>{index > 0 ? ', ' : null}<GeometricVariableView variable={variable} /></span>
-        )}
-      </div>
-      <div>{consequents.map((assertion, index) =>
-        <div key={index}><AssertionView assertion={assertion} /></div>
-      )}</div>
+      {name}
+      {': '}
+      {antecedents.map((assertion, index) =>
+        <span key={index}>{index > 0 ? ', ' : null}<AssertionView key={index} assertion={assertion} /></span>
+      )}
+      {' → '}
+      {newVariables.length > 0 ? '∃' : null}
+      {newVariables.map((variable, index) =>
+        <span key={index}>{index > 0 ? ', ' : null}<GeometricVariableView variable={variable} /></span>
+      )}
+      {' '}
+      {consequents.map((assertion, index) =>
+        <span key={index}>{index > 0 ? ', ' : null}<AssertionView assertion={assertion} /></span>
+      )}
     </div>
   );
 }
