@@ -36,6 +36,7 @@ import {
 import {
   segmentEqualitySymmetryTheorem,
   segmentEqualityTransitivityTheorem,
+  pointNonEqualitySymmetryTheorem,
 } from '../../E/theorems/EqualityTheorems';
 import { segmentSymmetryTheorem } from '../../E/theorems/MetricInferenceTheorems';
 import { circleRadiiEqualTheorem } from '../../E/theorems/TransferInferenceTheorems';
@@ -58,7 +59,7 @@ export const BookIProp1 = theorem(
 
 export function proveBookIProp1(): JustifiedAssertionReferences {
   const assumptions = assumeAll(BookIProp1.antecedents);
-  const distinctPointsAB = justifiedAssertionReference(assumptions, 0);
+  const pointANotEqualB = justifiedAssertionReference(assumptions, 0);
 
   const constructCircleAlphaStep = applyTheorem(
     theoremWithRenames(constructCircleTheorem, [
@@ -66,10 +67,16 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
       rename(pointOnCircle, pointB),
       rename(newCircle, circleAlpha),
     ]),
-    [distinctPointsAB],
+    [pointANotEqualB],
   );
   const pointACenterOfAlpha = justifiedAssertionReference(constructCircleAlphaStep, 0);
   const pointBOnAlpha = justifiedAssertionReference(constructCircleAlphaStep, 1);
+
+  const pointBNotEqualAStep = applyTheorem(
+    theoremWithRenames(pointNonEqualitySymmetryTheorem),
+    [pointANotEqualB],
+  );
+  const pointBNotEqualA = justifiedAssertionReference(pointBNotEqualAStep, 0);
 
   const constructCircleBetaStep = applyTheorem(
     theoremWithRenames(constructCircleTheorem, [
@@ -77,7 +84,7 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
       rename(pointOnCircle, pointA),
       rename(newCircle, circleBeta),
     ]),
-    [distinctPointsAB],
+    [pointBNotEqualA],
   );
   const pointBCenterOfBeta = justifiedAssertionReference(constructCircleBetaStep, 0);
   const pointAOnBeta = justifiedAssertionReference(constructCircleBetaStep, 1);
