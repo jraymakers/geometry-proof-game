@@ -10,7 +10,7 @@ export const AssertionView: React.FC<{
 }) => {
   switch (assertion.assertionType) {
     case AssertionType.Contradiction:
-      return <span>Contradiction</span>;
+      return <span>{'⊥'}</span>;
     case AssertionType.Relation:
       return <RelationAssertionView assertion={assertion} />
   }

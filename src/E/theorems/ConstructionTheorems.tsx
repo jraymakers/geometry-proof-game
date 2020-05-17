@@ -1,6 +1,6 @@
 import { circle1, circle2, newCircle } from '../constants/SemanticCircles';
 import { newPoint, pointAtCenter, pointOnCircle } from '../constants/SemanticPoints';
-import { relationAssertion } from '../functions/AssertionMakers';
+import { isFalse, isTrue } from '../functions/AssertionMakers';
 import {
   circlesIntersect,
   pointIsCenterOfCircle,
@@ -12,25 +12,27 @@ import { theorem } from '../functions/TheoremMakers';
 // Lines and Circles #2
 export const constructCircleTheorem = theorem(
   'Construct circle',
+  [pointAtCenter, pointOnCircle],
   [
-    relationAssertion(pointsAreEqual(pointAtCenter, pointOnCircle), false),
+    isFalse(pointsAreEqual(pointAtCenter, pointOnCircle)),
   ],
   [newCircle],
   [
-    relationAssertion(pointIsCenterOfCircle(pointAtCenter, newCircle)),
-    relationAssertion(pointIsOnCircle(pointOnCircle, newCircle)),
+    isTrue(pointIsCenterOfCircle(pointAtCenter, newCircle)),
+    isTrue(pointIsOnCircle(pointOnCircle, newCircle)),
   ],
 );
 
 // Intersections #6
 export const constructCircleCircleIntersectionPointTheorem = theorem(
   'Construct circle/circle intersection point',
+  [circle1, circle2],
   [
-    relationAssertion(circlesIntersect(circle1, circle2)),
+    isTrue(circlesIntersect(circle1, circle2)),
   ],
   [newPoint],
   [
-    relationAssertion(pointIsOnCircle(newPoint, circle1)),
-    relationAssertion(pointIsOnCircle(newPoint, circle2)),
+    isTrue(pointIsOnCircle(newPoint, circle1)),
+    isTrue(pointIsOnCircle(newPoint, circle2)),
   ],
 );

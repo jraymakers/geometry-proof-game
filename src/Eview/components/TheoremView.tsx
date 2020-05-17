@@ -11,23 +11,29 @@ export const TheoremView: React.FC<{
 }) => {
   const {
     name,
+    forAll,
     antecedents,
-    newVariables,
+    thereExists,
     consequents,
   } = theorem;
   return (
     <div>
       {name}
       {': '}
+      {forAll.length > 0 ? '∀' : null}
+      {forAll.map((variable, index) =>
+        <span key={index}>{index > 0 ? ', ' : null}<GeometricVariableView variable={variable} /></span>
+      )}
+      {': '}
       {antecedents.map((assertion, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<AssertionView key={index} assertion={assertion} /></span>
       )}
       {' → '}
-      {newVariables.length > 0 ? '∃' : null}
-      {newVariables.map((variable, index) =>
+      {thereExists.length > 0 ? '∃' : null}
+      {thereExists.map((variable, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<GeometricVariableView variable={variable} /></span>
       )}
-      {' '}
+      {': '}
       {consequents.map((assertion, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<AssertionView assertion={assertion} /></span>
       )}

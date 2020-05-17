@@ -5,14 +5,16 @@ import { VariableRenameList } from '../types/VariableRename';
 
 export function theorem(
   name: string,
+  forAll: GeometricVariableList,
   antecedents: AssertionList,
-  newVariables: GeometricVariableList,
+  thereExists: GeometricVariableList,
   consequents: AssertionList,
 ): Theorem {
   return {
     name,
+    forAll,
     antecedents,
-    newVariables,
+    thereExists,
     consequents,
   };
 }

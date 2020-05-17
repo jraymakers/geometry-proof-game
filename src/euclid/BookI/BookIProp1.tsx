@@ -16,12 +16,13 @@ import {
   pointOnCircle1,
   pointOnCircle2,
 } from '../../E/constants/SemanticPoints';
-import { relationAssertion } from '../../E/functions/AssertionMakers';
+import { isFalse, isTrue } from '../../E/functions/AssertionMakers';
 import {
   applyTheorem,
   assumeAll,
   justifiedAssertionReference,
 } from '../../E/functions/JustifiedAssertionMakers';
+import { segmentMeasure } from '../../E/functions/MetricMakers';
 import { pointsAreEqual, segmentsAreEqual } from '../../E/functions/RelationMakers';
 import { rename } from '../../E/functions/RenameMakers';
 import { theorem, theoremWithRenames } from '../../E/functions/TheoremMakers';
@@ -34,26 +35,26 @@ import {
   circlesMutuallyInsideIntersectTheorem,
 } from '../../E/theorems/DiagrammaticInferenceTheorems';
 import {
+  pointNonEqualitySymmetryTheorem,
   segmentEqualitySymmetryTheorem,
   segmentEqualityTransitivityTheorem,
-  pointNonEqualitySymmetryTheorem,
 } from '../../E/theorems/EqualityTheorems';
 import { segmentSymmetryTheorem } from '../../E/theorems/MetricInferenceTheorems';
 import { circleRadiiEqualTheorem } from '../../E/theorems/TransferInferenceTheorems';
 import { JustifiedAssertionReferences } from '../../E/types/JustifiedAssertion';
 import { circleAlpha, circleBeta } from '../constants/NamedCircles';
-import { pointA, pointB, pointC } from '../constants/NamedPoints';
-import { segmentAB, segmentBC, segmentCA } from '../constants/NamedSegments';
+import { pointA, pointB, pointC, Pt } from '../constants/NamedPoints';
 
 export const BookIProp1 = theorem(
   'I.1',
+  [Pt.a, Pt.b],
   [
-    relationAssertion(pointsAreEqual(pointA, pointB), false),
+    isFalse(pointsAreEqual(Pt.a, Pt.b)),
   ],
-  [pointC],
+  [Pt.c],
   [
-    relationAssertion(segmentsAreEqual(segmentAB, segmentBC)),
-    relationAssertion(segmentsAreEqual(segmentBC, segmentCA)),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.b, Pt.c))),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.b, Pt.c), segmentMeasure(Pt.c, Pt.a))),
   ],
 );
 

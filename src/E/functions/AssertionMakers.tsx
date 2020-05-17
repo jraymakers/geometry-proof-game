@@ -5,7 +5,7 @@ export const contradictionAssertion: ContradictionAssertion = {
   assertionType: AssertionType.Contradiction,
 };
 
-export function relationAssertion(relation: Relation, positive = true): RelationAssertion {
+export function relationAssertion(relation: Relation, positive: boolean): RelationAssertion {
   return {
     assertionType: AssertionType.Relation,
     positive,
@@ -13,10 +13,10 @@ export function relationAssertion(relation: Relation, positive = true): Relation
   };
 }
 
-export function positiveRelationAssertion(relation: Relation): RelationAssertion {
+export function isTrue(relation: Relation): RelationAssertion {
   return relationAssertion(relation, true);
 }
 
-export function negativeRelationAssertion(relation: Relation): RelationAssertion {
+export function isFalse(relation: Relation): RelationAssertion {
   return relationAssertion(relation, false);
 }

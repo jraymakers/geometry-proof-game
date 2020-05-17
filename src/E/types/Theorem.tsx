@@ -4,8 +4,9 @@ import { VariableRenameList } from './VariableRename';
 
 export type Theorem = Readonly<{
   name: string;
+  forAll: GeometricVariableList;
   antecedents: AssertionList;
-  newVariables: GeometricVariableList;
+  thereExists: GeometricVariableList;
   consequents: AssertionList;
 }>;
 

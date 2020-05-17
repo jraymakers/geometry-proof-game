@@ -12,11 +12,6 @@ export const RelationAssertionView: React.FC<{
     positive,
     relation,
   } = assertion;
-  const relationElement = <RelationView relation={relation} />;
-  if (positive) {
-    return relationElement;
-  } else {
-    return <span><span>¬(</span>{relationElement}<span>)</span></span>;
-  }
+  return <RelationView relation={relation} positive={positive} />;
 }
 RelationAssertionView.displayName = 'RelationAssertionView';

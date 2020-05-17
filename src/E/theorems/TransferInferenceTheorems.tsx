@@ -1,6 +1,6 @@
 import { circle1 } from '../constants/SemanticCircles';
 import { point1OnCircle, point2OnCircle, pointAtCenter } from '../constants/SemanticPoints';
-import { relationAssertion } from '../functions/AssertionMakers';
+import { isTrue } from '../functions/AssertionMakers';
 import { segmentMeasure } from '../functions/MetricMakers';
 import {
   pointIsCenterOfCircle,
@@ -12,14 +12,15 @@ import { theorem } from '../functions/TheoremMakers';
 // Diagram-Segment Transfer Axioms #3 (forward)
 export const circleRadiiEqualTheorem = theorem(
   'Circle radii equal',
+  [pointAtCenter, point1OnCircle, point2OnCircle, circle1],
   [
-    relationAssertion(pointIsCenterOfCircle(pointAtCenter, circle1)),
-    relationAssertion(pointIsOnCircle(point1OnCircle, circle1)),
-    relationAssertion(pointIsOnCircle(point2OnCircle, circle1)),
+    isTrue(pointIsCenterOfCircle(pointAtCenter, circle1)),
+    isTrue(pointIsOnCircle(point1OnCircle, circle1)),
+    isTrue(pointIsOnCircle(point2OnCircle, circle1)),
   ],
   [],
   [
-    relationAssertion(segmentsAreEqual(
+    isTrue(segmentsAreEqual(
       segmentMeasure(pointAtCenter, point1OnCircle),
       segmentMeasure(pointAtCenter, point2OnCircle),
     )),

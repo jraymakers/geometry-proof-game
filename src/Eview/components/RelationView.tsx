@@ -20,14 +20,16 @@ const segmentClass = cssClass('SegmentView', 'root', {
 
 export const RelationView: React.FC<{
   relation: Relation;
+  positive: boolean;
 }> = ({
   relation,
+  positive,
 }) => {
   switch (relation.relationType) {
     case RelationType.PointsAreEqual:
       return (
         <BinaryInfixVariableRelationView
-          symbol='='
+          symbol={positive ? '=' : '≠'}
           v1={relation.point1}
           v2={relation.point2}
         />
@@ -35,7 +37,7 @@ export const RelationView: React.FC<{
     case RelationType.LinesAreEqual:
       return (
         <BinaryInfixVariableRelationView
-          symbol='='
+          symbol={positive ? '=' : '≠'}
           v1={relation.line1}
           v2={relation.line2}
         />
@@ -43,7 +45,7 @@ export const RelationView: React.FC<{
     case RelationType.CirclesAreEqual:
       return (
         <BinaryInfixVariableRelationView
-          symbol='='
+          symbol={positive ? '=' : '≠'}
           v1={relation.circle1}
           v2={relation.circle2}
         />
@@ -51,7 +53,7 @@ export const RelationView: React.FC<{
     case RelationType.SegmentsAreEqual:
       return (
         <BinaryInfixMetricRelationView
-          symbol='='
+          symbol={positive ? '=' : '≠'}
           m1={relation.segment1}
           m2={relation.segment2}
         />
@@ -59,7 +61,7 @@ export const RelationView: React.FC<{
     case RelationType.AnglesAreEqual:
       return (
         <BinaryInfixMetricRelationView
-          symbol='='
+          symbol={positive ? '=' : '≠'}
           m1={relation.angle1}
           m2={relation.angle2}
         />
@@ -67,7 +69,7 @@ export const RelationView: React.FC<{
     case RelationType.AreasAreEqual:
       return (
         <BinaryInfixMetricRelationView
-          symbol='='
+          symbol={positive ? '=' : '≠'}
           m1={relation.area1}
           m2={relation.area2}
         />
@@ -76,7 +78,7 @@ export const RelationView: React.FC<{
     case RelationType.SegmentLessThanSegment:
       return (
         <BinaryInfixMetricRelationView
-          symbol='<'
+          symbol={positive ? '<' : '≮'}
           m1={relation.segment1}
           m2={relation.segment2}
         />
@@ -84,7 +86,7 @@ export const RelationView: React.FC<{
     case RelationType.AngleLessThanAngle:
       return (
         <BinaryInfixMetricRelationView
-          symbol='<'
+          symbol={positive ? '<' : '≮'}
           m1={relation.angle1}
           m2={relation.angle2}
         />
@@ -92,7 +94,7 @@ export const RelationView: React.FC<{
     case RelationType.AreaLessThanArea:
       return (
         <BinaryInfixMetricRelationView
-          symbol='<'
+          symbol={positive ? '<' : '≮'}
           m1={relation.area1}
           m2={relation.area2}
         />
@@ -101,7 +103,7 @@ export const RelationView: React.FC<{
     case RelationType.PointIsOnLine:
       return (
         <BinaryPrefixVariableRelationView
-          name={'on-line'}
+          name={(!positive ? '¬' : '') + 'on-line'}
           v1={relation.point}
           v2={relation.line}
         />
@@ -109,7 +111,7 @@ export const RelationView: React.FC<{
     case RelationType.PointsAreOnSameSideOfLine:
       return (
         <TernaryPrefixVariableRelationView
-          name={'same-side'}
+          name={(!positive ? '¬' : '') + 'same-side'}
           v1={relation.point1}
           v2={relation.point2}
           v3={relation.line}
@@ -118,7 +120,7 @@ export const RelationView: React.FC<{
     case RelationType.PointIsBetweenPoints:
       return (
         <TernaryPrefixVariableRelationView
-          name={'between'}
+          name={(!positive ? '¬' : '') + 'between'}
           v1={relation.point1}
           v2={relation.point2}
           v3={relation.point3}
@@ -127,7 +129,7 @@ export const RelationView: React.FC<{
     case RelationType.PointIsOnCircle:
       return (
         <BinaryPrefixVariableRelationView
-          name={'on-circle'}
+          name={(!positive ? '¬' : '') + 'on-circle'}
           v1={relation.point}
           v2={relation.circle}
         />
@@ -135,7 +137,7 @@ export const RelationView: React.FC<{
     case RelationType.PointIsInsideCircle:
       return (
         <BinaryPrefixVariableRelationView
-          name={'inside'}
+          name={(!positive ? '¬' : '') + 'inside'}
           v1={relation.point}
           v2={relation.circle}
         />
@@ -143,7 +145,7 @@ export const RelationView: React.FC<{
     case RelationType.PointIsCenterOfCircle:
       return (
         <BinaryPrefixVariableRelationView
-          name={'center'}
+          name={(!positive ? '¬' : '') + 'center'}
           v1={relation.point}
           v2={relation.circle}
         />
@@ -152,7 +154,7 @@ export const RelationView: React.FC<{
     case RelationType.LinesIntersect:
       return (
         <BinaryPrefixVariableRelationView
-          name={'lines-intersect'}
+          name={(!positive ? '¬' : '') + 'lines-intersect'}
           v1={relation.line1}
           v2={relation.line2}
         />
@@ -160,7 +162,7 @@ export const RelationView: React.FC<{
     case RelationType.CirclesIntersect:
       return (
         <BinaryPrefixVariableRelationView
-          name={'circles-intersect'}
+          name={(!positive ? '¬' : '') + 'circles-intersect'}
           v1={relation.circle1}
           v2={relation.circle2}
         />
@@ -168,7 +170,7 @@ export const RelationView: React.FC<{
     case RelationType.LineAndCircleIntersect:
       return (
         <BinaryPrefixVariableRelationView
-          name={'line-circle-intersect'}
+          name={(!positive ? '¬' : '') + 'line-circle-intersect'}
           v1={relation.line}
           v2={relation.circle}
         />
