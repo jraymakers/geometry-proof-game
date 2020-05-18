@@ -30,7 +30,7 @@ export const circlesMutuallyInsideIntersectTheorem = theorem(
     isTrue(pointIsOnCircle(Pt.a, Cr.α)),
     isTrue(pointIsInsideCircle(Pt.b, Cr.α)),
     isTrue(pointIsOnCircle(Pt.b, Cr.β)),
-    isTrue(pointIsInsideCircle(Pt.b, Cr.β)),
+    isTrue(pointIsInsideCircle(Pt.a, Cr.β)),
   ],
   [],
   [
