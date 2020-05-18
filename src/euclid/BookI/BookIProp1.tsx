@@ -1,23 +1,5 @@
 import { Cr } from '../../E/constants/Cr';
 import { Pt } from '../../E/constants/Pt';
-import { circle1, circle2, newCircle } from '../../E/constants/SemanticCircles';
-import {
-  newPoint,
-  point1,
-  point1OnCircle,
-  point2,
-  point2OnCircle,
-  point3,
-  point4,
-  point5,
-  point6,
-  pointAtCenter,
-  pointInsideCircle1,
-  pointInsideCircle2,
-  pointOnCircle,
-  pointOnCircle1,
-  pointOnCircle2,
-} from '../../E/constants/SemanticPoints';
 import { isFalse, isTrue } from '../../E/functions/AssertionMakers';
 import {
   applyTheorem,
@@ -64,9 +46,9 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const constructCircleAlphaStep = applyTheorem(
     theoremWithRenames(constructCircleTheorem, [
-      rename(pointAtCenter, Pt.a),
-      rename(pointOnCircle, Pt.b),
-      rename(newCircle, Cr.α),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.b),
+      rename(Cr.α, Cr.α),
     ]),
     [pointANotEqualB],
   );
@@ -81,9 +63,9 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const constructCircleBetaStep = applyTheorem(
     theoremWithRenames(constructCircleTheorem, [
-      rename(pointAtCenter, Pt.b),
-      rename(pointOnCircle, Pt.a),
-      rename(newCircle, Cr.β),
+      rename(Pt.a, Pt.b),
+      rename(Pt.b, Pt.a),
+      rename(Cr.α, Cr.β),
     ]),
     [pointBNotEqualA],
   );
@@ -92,8 +74,8 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const pointAInsideAlphaStep = applyTheorem(
     theoremWithRenames(centerInsideTheorem, [
-      rename(pointAtCenter, Pt.a),
-      rename(circle1, Cr.α),
+      rename(Pt.a, Pt.a),
+      rename(Cr.α, Cr.α),
     ]),
     [pointACenterOfAlpha],
   );
@@ -101,8 +83,8 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const pointBInsideBetaStep = applyTheorem(
     theoremWithRenames(centerInsideTheorem, [
-      rename(pointAtCenter, Pt.b),
-      rename(circle1, Cr.β),
+      rename(Pt.a, Pt.b),
+      rename(Cr.α, Cr.β),
     ]),
     [pointBCenterOfBeta],
   );
@@ -110,12 +92,10 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const circlesAlphaBetaIntersectStep = applyTheorem(
     theoremWithRenames(circlesMutuallyInsideIntersectTheorem, [
-      rename(pointInsideCircle1, Pt.a),
-      rename(pointInsideCircle2, Pt.b),
-      rename(pointOnCircle1, Pt.b),
-      rename(pointOnCircle2, Pt.a),
-      rename(circle1, Cr.α),
-      rename(circle2, Cr.β),
+      rename(Pt.b, Pt.a),
+      rename(Pt.a, Pt.b),
+      rename(Cr.α, Cr.α),
+      rename(Cr.β, Cr.β),
     ]),
     [
       pointBOnAlpha,
@@ -128,9 +108,9 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const constructAlphaBetaIntersectionPointStep = applyTheorem(
     theoremWithRenames(constructCircleCircleIntersectionPointTheorem, [
-      rename(circle1, Cr.α),
-      rename(circle1, Cr.β),
-      rename(newPoint, Pt.c),
+      rename(Cr.α, Cr.α),
+      rename(Cr.β, Cr.β),
+      rename(Pt.c, Pt.c),
     ]),
     [
       circlesAlphaBetaIntersect,
@@ -141,10 +121,10 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentABEqualsACStep = applyTheorem(
     theoremWithRenames(circleRadiiEqualTheorem, [
-      rename(pointAtCenter, Pt.a),
-      rename(point1OnCircle, Pt.b),
-      rename(point2OnCircle, Pt.c),
-      rename(circle1, Cr.α),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.b),
+      rename(Pt.c, Pt.c),
+      rename(Cr.α, Cr.α),
     ]),
     [
       pointACenterOfAlpha,
@@ -156,10 +136,10 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentBAEqualsBCStep = applyTheorem(
     theoremWithRenames(circleRadiiEqualTheorem, [
-      rename(pointAtCenter, Pt.b),
-      rename(point1OnCircle, Pt.a),
-      rename(point2OnCircle, Pt.c),
-      rename(circle1, Cr.β),
+      rename(Pt.a, Pt.b),
+      rename(Pt.b, Pt.a),
+      rename(Pt.c, Pt.c),
+      rename(Cr.α, Cr.β),
     ]),
     [
       pointBCenterOfBeta,
@@ -171,8 +151,8 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentABEqualsBAStep = applyTheorem(
     theoremWithRenames(segmentSymmetryTheorem, [
-      rename(point1, Pt.a),
-      rename(point2, Pt.b),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.b),
     ]),
     [],
   );
@@ -180,12 +160,12 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentABEqualsBCStep = applyTheorem(
     theoremWithRenames(segmentEqualityTransitivityTheorem, [
-      rename(point1, Pt.a),
-      rename(point2, Pt.b),
-      rename(point3, Pt.b),
-      rename(point4, Pt.a),
-      rename(point5, Pt.b),
-      rename(point6, Pt.c),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.b),
+      rename(Pt.c, Pt.b),
+      rename(Pt.d, Pt.a),
+      rename(Pt.e, Pt.b),
+      rename(Pt.f, Pt.c),
     ]),
     [
       segmentABEqualsBA,
@@ -196,10 +176,10 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentBCEqualsABStep = applyTheorem(
     theoremWithRenames(segmentEqualitySymmetryTheorem, [
-      rename(point1, Pt.a),
-      rename(point2, Pt.b),
-      rename(point3, Pt.b),
-      rename(point4, Pt.c),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.b),
+      rename(Pt.c, Pt.b),
+      rename(Pt.d, Pt.c),
     ]),
     [
       segmentABEqualsBC
@@ -209,8 +189,8 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentACEqualsCAStep = applyTheorem(
     theoremWithRenames(segmentSymmetryTheorem, [
-      rename(point1, Pt.a),
-      rename(point2, Pt.c),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.c),
     ]),
     [],
   );
@@ -218,12 +198,12 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentABEqualsCAStep = applyTheorem(
     theoremWithRenames(segmentEqualityTransitivityTheorem, [
-      rename(point1, Pt.a),
-      rename(point2, Pt.b),
-      rename(point3, Pt.a),
-      rename(point4, Pt.c),
-      rename(point5, Pt.c),
-      rename(point6, Pt.a),
+      rename(Pt.a, Pt.a),
+      rename(Pt.b, Pt.b),
+      rename(Pt.c, Pt.a),
+      rename(Pt.d, Pt.c),
+      rename(Pt.e, Pt.c),
+      rename(Pt.f, Pt.a),
     ]),
     [
       segmentABEqualsAC,
@@ -234,12 +214,12 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
 
   const segmentBCEqualsCAStep = applyTheorem(
     theoremWithRenames(segmentEqualityTransitivityTheorem, [
-      rename(point1, Pt.c),
-      rename(point2, Pt.c),
-      rename(point3, Pt.a),
-      rename(point4, Pt.b),
-      rename(point5, Pt.c),
-      rename(point6, Pt.a),
+      rename(Pt.a, Pt.c),
+      rename(Pt.b, Pt.c),
+      rename(Pt.c, Pt.a),
+      rename(Pt.d, Pt.b),
+      rename(Pt.e, Pt.c),
+      rename(Pt.f, Pt.a),
     ]),
     [
       segmentBCEqualsAB,

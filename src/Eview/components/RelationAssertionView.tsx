@@ -117,7 +117,7 @@ export const RelationAssertionView: React.FC<{
     case RelationType.PointIsOnLine:
       return (
         <BinaryPrefixVariableRelationView
-          name={relationOrNotRelation(positive, 'on-line')}
+          name={relationOrNotRelation(positive, 'on')}
           v1={relation.point}
           v2={relation.line}
         />
@@ -143,7 +143,7 @@ export const RelationAssertionView: React.FC<{
     case RelationType.PointIsOnCircle:
       return (
         <BinaryPrefixVariableRelationView
-          name={relationOrNotRelation(positive, 'on-circle')}
+          name={relationOrNotRelation(positive, 'on')}
           v1={relation.point}
           v2={relation.circle}
         />
@@ -168,7 +168,7 @@ export const RelationAssertionView: React.FC<{
     case RelationType.LinesIntersect:
       return (
         <BinaryPrefixVariableRelationView
-          name={relationOrNotRelation(positive, 'lines-intersect')}
+          name={relationOrNotRelation(positive, 'intersect')}
           v1={relation.line1}
           v2={relation.line2}
         />
@@ -176,7 +176,7 @@ export const RelationAssertionView: React.FC<{
     case RelationType.CirclesIntersect:
       return (
         <BinaryPrefixVariableRelationView
-          name={relationOrNotRelation(positive, 'circles-intersect')}
+          name={relationOrNotRelation(positive, 'intersect')}
           v1={relation.circle1}
           v2={relation.circle2}
         />
@@ -184,7 +184,7 @@ export const RelationAssertionView: React.FC<{
     case RelationType.LineAndCircleIntersect:
       return (
         <BinaryPrefixVariableRelationView
-          name={relationOrNotRelation(positive, 'line-circle-intersect')}
+          name={relationOrNotRelation(positive, 'intersect')}
           v1={relation.line}
           v2={relation.circle}
         />
@@ -245,7 +245,7 @@ export const BinaryPrefixVariableRelationView: React.FC<{
       <span>{name}</span>
       <span>(</span>
       <GeometricVariableView variable={v1} />
-      <span>,</span>
+      <span>, </span>
       <GeometricVariableView variable={v2} />
       <span>)</span>
     </span>
@@ -269,9 +269,9 @@ export const TernaryPrefixVariableRelationView: React.FC<{
       <span>{name}</span>
       <span>(</span>
       <GeometricVariableView variable={v1} />
-      <span>,</span>
+      <span>, </span>
       <GeometricVariableView variable={v2} />
-      <span>,</span>
+      <span>, </span>
       <GeometricVariableView variable={v3} />
       <span>)</span>
     </span>

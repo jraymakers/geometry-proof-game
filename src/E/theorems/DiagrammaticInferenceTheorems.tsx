@@ -1,11 +1,5 @@
-import { circle1, circle2 } from '../constants/SemanticCircles';
-import {
-  pointAtCenter,
-  pointInsideCircle1,
-  pointInsideCircle2,
-  pointOnCircle1,
-  pointOnCircle2,
-} from '../constants/SemanticPoints';
+import { Cr } from '../constants/Cr';
+import { Pt } from '../constants/Pt';
 import { isTrue } from '../functions/AssertionMakers';
 import {
   circlesIntersect,
@@ -18,28 +12,28 @@ import { theorem } from '../functions/TheoremMakers';
 // Generalities #3
 export const centerInsideTheorem = theorem(
   'Center inside',
-  [pointAtCenter, circle1],
+  [Pt.a, Cr.α],
   [
-    isTrue(pointIsCenterOfCircle(pointAtCenter, circle1)),
+    isTrue(pointIsCenterOfCircle(Pt.a, Cr.α)),
   ],
   [],
   [
-    isTrue(pointIsInsideCircle(pointAtCenter, circle1)),
+    isTrue(pointIsInsideCircle(Pt.a, Cr.α)),
   ],
 );
 
 // Intersection Axioms #5
 export const circlesMutuallyInsideIntersectTheorem = theorem(
   'Circles mutally inside intersect',
-  [pointOnCircle1, pointOnCircle2, circle1, circle2],
+  [Pt.a, Pt.b, Cr.α, Cr.β],
   [
-    isTrue(pointIsOnCircle(pointOnCircle1, circle1)),
-    isTrue(pointIsInsideCircle(pointInsideCircle1, circle1)),
-    isTrue(pointIsOnCircle(pointOnCircle2, circle2)),
-    isTrue(pointIsInsideCircle(pointInsideCircle2, circle2)),
+    isTrue(pointIsOnCircle(Pt.a, Cr.α)),
+    isTrue(pointIsInsideCircle(Pt.b, Cr.α)),
+    isTrue(pointIsOnCircle(Pt.b, Cr.β)),
+    isTrue(pointIsInsideCircle(Pt.b, Cr.β)),
   ],
   [],
   [
-    isTrue(circlesIntersect(circle1, circle2)),
+    isTrue(circlesIntersect(Cr.α, Cr.β)),
   ],
 );

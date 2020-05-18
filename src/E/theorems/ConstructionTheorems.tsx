@@ -1,5 +1,5 @@
-import { circle1, circle2, newCircle } from '../constants/SemanticCircles';
-import { newPoint, pointAtCenter, pointOnCircle } from '../constants/SemanticPoints';
+import { Cr } from '../constants/Cr';
+import { Pt } from '../constants/Pt';
 import { isFalse, isTrue } from '../functions/AssertionMakers';
 import {
   circlesIntersect,
@@ -12,27 +12,27 @@ import { theorem } from '../functions/TheoremMakers';
 // Lines and Circles #2
 export const constructCircleTheorem = theorem(
   'Construct circle',
-  [pointAtCenter, pointOnCircle],
+  [Pt.a, Pt.b],
   [
-    isFalse(pointsAreEqual(pointAtCenter, pointOnCircle)),
+    isFalse(pointsAreEqual(Pt.a, Pt.b)),
   ],
-  [newCircle],
+  [Cr.α],
   [
-    isTrue(pointIsCenterOfCircle(pointAtCenter, newCircle)),
-    isTrue(pointIsOnCircle(pointOnCircle, newCircle)),
+    isTrue(pointIsCenterOfCircle(Pt.a, Cr.α)),
+    isTrue(pointIsOnCircle(Pt.b, Cr.α)),
   ],
 );
 
 // Intersections #6
 export const constructCircleCircleIntersectionPointTheorem = theorem(
   'Construct circle/circle intersection point',
-  [circle1, circle2],
+  [Cr.α, Cr.β],
   [
-    isTrue(circlesIntersect(circle1, circle2)),
+    isTrue(circlesIntersect(Cr.α, Cr.β)),
   ],
-  [newPoint],
+  [Pt.c],
   [
-    isTrue(pointIsOnCircle(newPoint, circle1)),
-    isTrue(pointIsOnCircle(newPoint, circle2)),
+    isTrue(pointIsOnCircle(Pt.c, Cr.α)),
+    isTrue(pointIsOnCircle(Pt.c, Cr.β)),
   ],
 );
