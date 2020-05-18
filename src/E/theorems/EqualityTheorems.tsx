@@ -1,4 +1,4 @@
-import { pointA, pointB, pointC, pointD, pointE, pointF } from '../../euclid/constants/NamedPoints';
+import { Pt } from '../constants/Pt';
 import { isFalse, isTrue } from '../functions/AssertionMakers';
 import { segmentMeasure } from '../functions/MetricMakers';
 import { pointsAreEqual, segmentsAreEqual } from '../functions/RelationMakers';
@@ -6,61 +6,61 @@ import { theorem } from '../functions/TheoremMakers';
 
 export const pointEqualitySymmetryTheorem = theorem(
   'Point equality symmetry',
-  [pointA, pointB],
+  [Pt.a, Pt.b],
   [
-    isTrue(pointsAreEqual(pointA, pointB)),
+    isTrue(pointsAreEqual(Pt.a, Pt.b)),
   ],
   [],
   [
-    isTrue(pointsAreEqual(pointB, pointA)),
+    isTrue(pointsAreEqual(Pt.b, Pt.a)),
   ],
 );
 
 export const pointNonEqualitySymmetryTheorem = theorem(
   'Point non-equality symmetry',
-  [pointA, pointB],
+  [Pt.a, Pt.b],
   [
-    isFalse(pointsAreEqual(pointA, pointB)),
+    isFalse(pointsAreEqual(Pt.a, Pt.b)),
   ],
   [],
   [
-    isFalse(pointsAreEqual(pointB, pointA)),
+    isFalse(pointsAreEqual(Pt.b, Pt.a)),
   ],
 );
 
 export const segmentEqualitySymmetryTheorem = theorem(
   'Segment equality symmetry',
-  [pointA, pointB, pointC, pointD],
+  [Pt.a, Pt.b, Pt.c, Pt.d],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(pointA, pointB), segmentMeasure(pointC, pointD))),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.c, Pt.d))),
   ],
   [],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(pointC, pointD), segmentMeasure(pointA, pointB))),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.c, Pt.d), segmentMeasure(Pt.a, Pt.b))),
   ],
 );
 
 export const segmentNonEqualitySymmetryTheorem = theorem(
   'Segment non-equality symmetry',
-  [pointA, pointB, pointC, pointD],
+  [Pt.a, Pt.b, Pt.c, Pt.d],
   [
-    isFalse(segmentsAreEqual(segmentMeasure(pointA, pointB), segmentMeasure(pointC, pointD))),
+    isFalse(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.c, Pt.d))),
   ],
   [],
   [
-    isFalse(segmentsAreEqual(segmentMeasure(pointC, pointD), segmentMeasure(pointA, pointB))),
+    isFalse(segmentsAreEqual(segmentMeasure(Pt.c, Pt.d), segmentMeasure(Pt.a, Pt.b))),
   ],
 );
 
 export const segmentEqualityTransitivityTheorem = theorem(
   'Segment equality transitivity',
-  [pointA, pointB, pointC, pointD, pointE, pointF],
+  [Pt.a, Pt.b, Pt.c, Pt.d, Pt.e, Pt.f],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(pointA, pointB), segmentMeasure(pointC, pointD))),
-    isTrue(segmentsAreEqual(segmentMeasure(pointC, pointD), segmentMeasure(pointE, pointF))),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.c, Pt.d))),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.c, Pt.d), segmentMeasure(Pt.e, Pt.f))),
   ],
   [],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(pointA, pointB), segmentMeasure(pointE, pointF))),
+    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.e, Pt.f))),
   ],
 );

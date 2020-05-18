@@ -313,8 +313,8 @@ export const SegmentView: React.FC<{
     case MetricTermType.Measure:
       return (
         <span className={segmentClass}>
-          {segment.point1.name}
-          {segment.point2.name}
+          <GeometricVariableView variable={segment.point1} />
+          <GeometricVariableView variable={segment.point2} />
         </span>
       );
   }
@@ -340,14 +340,10 @@ export const AngleView: React.FC<{
     case MetricTermType.Measure:
       return (
         <span>
-          <span>{'angle'}</span>
-          <span>(</span>
-          <span>{angle.point1.name}</span>
-          <span>,</span>
-          <span>{angle.point2.name}</span>
-          <span>,</span>
-          <span>{angle.point3.name}</span>
-          <span>)</span>
+          <span>{'∠'}</span>
+          <GeometricVariableView variable={angle.point1} />
+          <GeometricVariableView variable={angle.point2} />
+          <GeometricVariableView variable={angle.point3} />
         </span>
       );
   }
@@ -373,14 +369,10 @@ export const AreaView: React.FC<{
     case MetricTermType.Measure:
       return (
         <span>
-          <span>{'area'}</span>
-          <span>(</span>
-          <span>{area.point1.name}</span>
-          <span>,</span>
-          <span>{area.point2.name}</span>
-          <span>,</span>
-          <span>{area.point3.name}</span>
-          <span>)</span>
+          <span>{'△'}</span>
+          <GeometricVariableView variable={area.point1} />
+          <GeometricVariableView variable={area.point2} />
+          <GeometricVariableView variable={area.point3} />
         </span>
       );
   }

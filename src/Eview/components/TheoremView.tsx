@@ -24,16 +24,16 @@ export const TheoremView: React.FC<{
       {forAll.map((variable, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<GeometricVariableView variable={variable} /></span>
       )}
-      {': '}
+      {forAll.length > 0 ? ': ' : null}
       {antecedents.map((assertion, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<AssertionView key={index} assertion={assertion} /></span>
       )}
-      {' → '}
+      {antecedents.length > 0 ? ' → ' : null}
       {thereExists.length > 0 ? '∃' : null}
       {thereExists.map((variable, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<GeometricVariableView variable={variable} /></span>
       )}
-      {': '}
+      {thereExists.length > 0 ? ': ' : null}
       {consequents.map((assertion, index) =>
         <span key={index}>{index > 0 ? ', ' : null}<AssertionView assertion={assertion} /></span>
       )}

@@ -1,0 +1,28 @@
+import { circle } from '../functions/VariableMakers';
+
+export const Cr = {
+  α: circle('α'),
+  β: circle('β'),
+  γ: circle('γ'),
+  δ: circle('δ'),
+  ε: circle('ε'),
+  ζ: circle('ζ'),
+  η: circle('η'),
+  θ: circle('θ'),
+  ι: circle('ι'),
+  κ: circle('κ'),
+  λ: circle('λ'),
+  μ: circle('μ'),
+  ν: circle('ν'),
+  ξ: circle('ξ'),
+  ο: circle('ο'),
+  π: circle('π'),
+  ρ: circle('ρ'),
+  σ: circle('σ'),
+  τ: circle('τ'),
+  υ: circle('υ'),
+  φ: circle('φ'),
+  χ: circle('χ'),
+  ψ: circle('ψ'),
+  ω: circle('ω'),
+};
