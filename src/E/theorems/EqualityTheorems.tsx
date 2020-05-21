@@ -1,6 +1,6 @@
 import { Pt } from '../constants/Pt';
 import { isFalse, isTrue } from '../functions/AssertionMakers';
-import { segmentMeasure } from '../functions/MetricMakers';
+import { seg } from '../functions/MetricMakers';
 import { pointsAreEqual, segmentsAreEqual } from '../functions/RelationMakers';
 import { theorem } from '../functions/TheoremMakers';
 
@@ -32,11 +32,11 @@ export const segmentEqualitySymmetryTheorem = theorem(
   'Segment equality symmetry',
   [Pt.a, Pt.b, Pt.c, Pt.d],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.c, Pt.d))),
+    isTrue(segmentsAreEqual(seg(Pt.a, Pt.b), seg(Pt.c, Pt.d))),
   ],
   [],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(Pt.c, Pt.d), segmentMeasure(Pt.a, Pt.b))),
+    isTrue(segmentsAreEqual(seg(Pt.c, Pt.d), seg(Pt.a, Pt.b))),
   ],
 );
 
@@ -44,11 +44,11 @@ export const segmentNonEqualitySymmetryTheorem = theorem(
   'Segment non-equality symmetry',
   [Pt.a, Pt.b, Pt.c, Pt.d],
   [
-    isFalse(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.c, Pt.d))),
+    isFalse(segmentsAreEqual(seg(Pt.a, Pt.b), seg(Pt.c, Pt.d))),
   ],
   [],
   [
-    isFalse(segmentsAreEqual(segmentMeasure(Pt.c, Pt.d), segmentMeasure(Pt.a, Pt.b))),
+    isFalse(segmentsAreEqual(seg(Pt.c, Pt.d), seg(Pt.a, Pt.b))),
   ],
 );
 
@@ -56,11 +56,11 @@ export const segmentEqualityTransitivityTheorem = theorem(
   'Segment equality transitivity',
   [Pt.a, Pt.b, Pt.c, Pt.d, Pt.e, Pt.f],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.c, Pt.d))),
-    isTrue(segmentsAreEqual(segmentMeasure(Pt.c, Pt.d), segmentMeasure(Pt.e, Pt.f))),
+    isTrue(segmentsAreEqual(seg(Pt.a, Pt.b), seg(Pt.c, Pt.d))),
+    isTrue(segmentsAreEqual(seg(Pt.c, Pt.d), seg(Pt.e, Pt.f))),
   ],
   [],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.e, Pt.f))),
+    isTrue(segmentsAreEqual(seg(Pt.a, Pt.b), seg(Pt.e, Pt.f))),
   ],
 );

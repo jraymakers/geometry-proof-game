@@ -1,6 +1,6 @@
 import { Pt } from '../constants/Pt';
 import { isTrue } from '../functions/AssertionMakers';
-import { segmentMeasure } from '../functions/MetricMakers';
+import { seg } from '../functions/MetricMakers';
 import { segmentsAreEqual } from '../functions/RelationMakers';
 import { theorem } from '../functions/TheoremMakers';
 
@@ -11,6 +11,6 @@ export const segmentSymmetryTheorem = theorem(
   [],
   [],
   [
-    isTrue(segmentsAreEqual(segmentMeasure(Pt.a, Pt.b), segmentMeasure(Pt.b, Pt.a))),
+    isTrue(segmentsAreEqual(seg(Pt.a, Pt.b), seg(Pt.b, Pt.a))),
   ],
 );

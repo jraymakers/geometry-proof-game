@@ -1,7 +1,6 @@
 import { AssertionList } from '../types/Assertion';
 import { GeometricVariableList } from '../types/GeometricVariable';
-import { Theorem, TheoremWithRenames } from '../types/Theorem';
-import { VariableRenameList } from '../types/VariableRename';
+import { Theorem } from '../types/Theorem';
 
 export function theorem(
   name: string,
@@ -16,15 +15,5 @@ export function theorem(
     antecedents,
     thereExists,
     consequents,
-  };
-}
-
-export function theoremWithRenames(
-  theorem: Theorem,
-  renames: VariableRenameList = [],
-): TheoremWithRenames {
-  return {
-    theorem,
-    renames,
   };
 }

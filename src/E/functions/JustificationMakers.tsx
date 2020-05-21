@@ -11,7 +11,8 @@ import {
   TheoremApplicationJustification,
 } from '../types/Justification';
 import { JustifiedAssertionReferences } from '../types/JustifiedAssertion';
-import { TheoremWithRenames } from '../types/Theorem';
+import { Theorem } from '../types/Theorem';
+import { VariableRenameList } from '../types/VariableRename';
 
 export const assumptionJustification: AssumptionJustification = {
   justificationType: JustificationType.Assumption,
@@ -55,12 +56,14 @@ export const suppositionJustification: SuppositionJustification = {
 };
 
 export function theoremApplicationJustification(
-  theorem: TheoremWithRenames,
+  theorem: Theorem,
+  renames: VariableRenameList,
   justifiedAntecedents: JustifiedAssertionReferences,
 ): TheoremApplicationJustification {
   return {
     justificationType: JustificationType.TheoremApplication,
     theorem,
+    renames,
     justifiedAntecedents,
   };
 }

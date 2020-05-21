@@ -1,7 +1,7 @@
 import { Cr } from '../constants/Cr';
 import { Pt } from '../constants/Pt';
 import { isTrue } from '../functions/AssertionMakers';
-import { segmentMeasure } from '../functions/MetricMakers';
+import { seg } from '../functions/MetricMakers';
 import {
   pointIsCenterOfCircle,
   pointIsOnCircle,
@@ -20,9 +20,6 @@ export const circleRadiiEqualTheorem = theorem(
   ],
   [],
   [
-    isTrue(segmentsAreEqual(
-      segmentMeasure(Pt.a, Pt.b),
-      segmentMeasure(Pt.a, Pt.c),
-    )),
+    isTrue(segmentsAreEqual(seg(Pt.a, Pt.b), seg(Pt.a, Pt.c))),
   ],
 );

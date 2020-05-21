@@ -4,8 +4,9 @@ import {
   JustifiedAssertionReferences,
   JustifiedAssertions,
 } from '../types/JustifiedAssertion';
-import { TheoremWithRenames } from '../types/Theorem';
+import { Theorem } from '../types/Theorem';
 import { assumptionJustification, theoremApplicationJustification } from './JustificationMakers';
+import { VariableRenameList } from '../types/VariableRename';
 
 export function justifiedAssertionReference(
   justifiedAssertions: JustifiedAssertions,
@@ -32,12 +33,14 @@ export function assumeAll(assertions: AssertionList): JustifiedAssertions {
 }
 
 export function applyTheorem(
-  theorem: TheoremWithRenames,
+  theorem: Theorem,
   justifiedAntecedents: JustifiedAssertionReferences,
+  renames: VariableRenameList = [],
 ): JustifiedAssertions {
   const assertions: AssertionList = []; // todo
   const justification = theoremApplicationJustification(
     theorem,
+    renames,
     justifiedAntecedents,
   );
   return {

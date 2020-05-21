@@ -30,6 +30,8 @@ export function segmentAddition(
   };
 }
 
+export const segAdd = segmentAddition;
+
 export function segmentConstant(
   name: string,
 ): SegmentMetricConstant {
@@ -52,6 +54,8 @@ export function segmentMeasure(
   };
 }
 
+export const seg = segmentMeasure;
+
 // Angle
 
 export function angleAddition(
@@ -65,6 +69,8 @@ export function angleAddition(
     angle2,
   };
 }
+
+export const angleAdd = angleAddition;
 
 export function angleConstant(
   name: string,
@@ -90,6 +96,8 @@ export function angleMeasure(
   };
 }
 
+export const angle = angleMeasure;
+
 // Area
 
 export function areaAddition(
@@ -103,6 +111,8 @@ export function areaAddition(
     area2,
   };
 }
+
+export const areaAdd = areaAddition
 
 export function areaConstant(
   name: string,
@@ -127,3 +137,5 @@ export function areaMeasure(
     point3,
   };
 }
+
+export const area = areaMeasure;
