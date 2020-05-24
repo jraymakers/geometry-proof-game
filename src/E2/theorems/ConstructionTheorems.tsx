@@ -1,10 +1,14 @@
 import { Cr } from '../constants/Cr';
-import { Name } from '../constants/Name';
 import { Pt } from '../constants/Pt';
-import { pointCenter, pointOnCircle, pointsNotEqual } from '../functions/Assertions';
-import { renameTheoremElems } from '../functions/Renames';
+import {
+  circlesIntersect,
+  pointIsCenter,
+  pointIsOnCircle,
+  pointsNotEqual,
+} from '../functions/Assertions';
 import { Theorem } from '../types/Theorem';
 
+// Lines and Circles #2
 export const constructCircleTheorem: Theorem = {
   name: 'Construct Circle',
   forAll: [Pt.a, Pt.b],
@@ -13,13 +17,21 @@ export const constructCircleTheorem: Theorem = {
   ],
   thereExists: [Cr.α],
   consequents: [
-    pointCenter(Pt.a, Cr.α),
-    pointOnCircle(Pt.b, Cr.α),
+    pointIsCenter(Pt.a, Cr.α),
+    pointIsOnCircle(Pt.b, Cr.α),
   ],
 };
 
-export const renamedConstructCircleTheorem = renameTheoremElems(constructCircleTheorem, {
-  [Name.a]: Name.b,
-  [Name.b]: Name.a,
-  [Name.α]: Name.β,
-});
+// Intersections #6
+export const constructCirclesIntersectionPointTheorem: Theorem = {
+  name: 'Construct Circles Intersection Point',
+  forAll: [Cr.α, Cr.β],
+  antecedents: [
+    circlesIntersect(Cr.α, Cr.β),
+  ],
+  thereExists: [Pt.c],
+  consequents: [
+    pointIsOnCircle(Pt.c, Cr.α),
+    pointIsOnCircle(Pt.c, Cr.β),
+  ],
+};
