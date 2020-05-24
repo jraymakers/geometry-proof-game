@@ -4,7 +4,7 @@ import { seg } from '../functions/Exps';
 import { Theorem } from '../types/Theorem';
 
 // #3: ab=ba
-export const segmentSymmetryTheorem: Theorem = {
+export const SegmentSymmetryTheorem: Theorem = {
   name: 'Segment Symmetry',
   forAll: [Pt.a, Pt.b],
   antecedents: [],

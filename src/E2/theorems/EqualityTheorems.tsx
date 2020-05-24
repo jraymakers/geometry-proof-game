@@ -8,7 +8,7 @@ import {
 import { seg } from '../functions/Exps';
 import { Theorem } from '../types/Theorem';
 
-export const pointEqualitySymmetryTheorem: Theorem = {
+export const PointEqualitySymmetryTheorem: Theorem = {
   name: 'Point Equality Symmetry',
   forAll: [Pt.a, Pt.b],
   antecedents: [
@@ -20,7 +20,7 @@ export const pointEqualitySymmetryTheorem: Theorem = {
   ],
 };
 
-export const pointNonEqualitySymmetryTheorem: Theorem = {
+export const PointNonEqualitySymmetryTheorem: Theorem = {
   name: 'Point Non-Equality Symmetry',
   forAll: [Pt.a, Pt.b],
   antecedents: [
@@ -32,7 +32,7 @@ export const pointNonEqualitySymmetryTheorem: Theorem = {
   ],
 };
 
-export const segmentEqualitySymmetryTheorem: Theorem = {
+export const SegmentEqualitySymmetryTheorem: Theorem = {
   name: 'Segment Equality Symmetry',
   forAll: [Pt.a, Pt.b, Pt.c, Pt.d],
   antecedents: [
@@ -44,7 +44,7 @@ export const segmentEqualitySymmetryTheorem: Theorem = {
   ],
 };
 
-export const segmentNonEqualitySymmetryTheorem: Theorem = {
+export const SegmentNonEqualitySymmetryTheorem: Theorem = {
   name: 'Segment Non-Equality Symmetry',
   forAll: [Pt.a, Pt.b, Pt.c, Pt.d],
   antecedents: [
@@ -56,7 +56,7 @@ export const segmentNonEqualitySymmetryTheorem: Theorem = {
   ],
 };
 
-export const segmentEqualityTransitivityTheorem: Theorem = {
+export const SegmentEqualityTransitivityTheorem: Theorem = {
   name: 'Segment Equality Transitivity',
   forAll: [Pt.a, Pt.b, Pt.c, Pt.d, Pt.e, Pt.f],
   antecedents: [

@@ -233,7 +233,7 @@ export function proveBookIProp1(): JustifiedAssertionReferences {
       ab_eq_ca,
     ],
     [
-      rename(Pt.a, Pt.c),
+      rename(Pt.a, Pt.b),
       rename(Pt.b, Pt.c),
       rename(Pt.c, Pt.a),
       rename(Pt.d, Pt.b),

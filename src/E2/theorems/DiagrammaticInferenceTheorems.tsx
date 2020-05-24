@@ -9,7 +9,7 @@ import {
 import { Theorem } from '../types/Theorem';
 
 // Generalities #3
-export const centerInsideTheorem: Theorem = {
+export const CenterInsideTheorem: Theorem = {
   name: 'Center Inside',
   forAll: [Pt.a, Cr.α],
   antecedents: [
@@ -23,7 +23,7 @@ export const centerInsideTheorem: Theorem = {
 
 
 // Intersection Axioms #5
-export const circlesMutuallyInsideIntersectTheorem: Theorem = {
+export const CirclesMutuallyInsideIntersectTheorem: Theorem = {
   name: 'Circles Mutally Inside Intersect',
   forAll: [Pt.a, Pt.b, Cr.α, Cr.β],
   antecedents: [

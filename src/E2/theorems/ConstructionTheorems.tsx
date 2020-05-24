@@ -9,7 +9,7 @@ import {
 import { Theorem } from '../types/Theorem';
 
 // Lines and Circles #2
-export const constructCircleTheorem: Theorem = {
+export const ConstructCircleTheorem: Theorem = {
   name: 'Construct Circle',
   forAll: [Pt.a, Pt.b],
   antecedents: [
@@ -23,7 +23,7 @@ export const constructCircleTheorem: Theorem = {
 };
 
 // Intersections #6
-export const constructCirclesIntersectionPointTheorem: Theorem = {
+export const ConstructCirclesIntersectionPointTheorem: Theorem = {
   name: 'Construct Circles Intersection Point',
   forAll: [Cr.α, Cr.β],
   antecedents: [

@@ -5,7 +5,7 @@ import { seg } from '../functions/Exps';
 import { Theorem } from '../types/Theorem';
 
 // Diagram-Segment Transfer Axioms #3 (forward)
-export const circleRadiiEqualTheorem: Theorem = {
+export const CircleRadiiEqualTheorem: Theorem = {
   name: 'Circle Radii Equal',
   forAll: [Pt.a, Pt.b, Pt.c, Cr.α],
   antecedents: [
