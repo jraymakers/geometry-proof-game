@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { Cr } from '../../E/constants/Cr';
 import { Pt } from '../../E/constants/Pt';
 import { isFalse, isTrue } from '../../E/functions/AssertionMakers';

@@ -30,6 +30,192 @@ function relationOrNotRelation(positive: boolean, name: string): string {
   return positive ? name : '¬' + name;
 }
 
+export const SegmentView: React.FC<{
+  segment: SegmentMetric;
+}> = ({
+  segment,
+}) => {
+  switch (segment.termType) {
+    case MetricTermType.Addition:
+      return (
+        <span>
+          <SegmentView segment={segment.segment1} />
+          <span>{'+'}</span>
+          <SegmentView segment={segment.segment2} />
+        </span>
+      );
+    case MetricTermType.Constant:
+      return <span>{segment.name}</span>;
+    case MetricTermType.Measure:
+      return (
+        <span className={segmentClass}>
+          <GeometricVariableView variable={segment.point1} />
+          <GeometricVariableView variable={segment.point2} />
+        </span>
+      );
+  }
+}
+SegmentView.displayName = 'SegmentView';
+
+export const AngleView: React.FC<{
+  angle: AngleMetric;
+}> = ({
+  angle,
+}) => {
+  switch (angle.termType) {
+    case MetricTermType.Addition:
+      return (
+        <span>
+          <AngleView angle={angle.angle1} />
+          <span>{'+'}</span>
+          <AngleView angle={angle.angle2} />
+        </span>
+      );
+    case MetricTermType.Constant:
+      return <span>{angle.name}</span>;
+    case MetricTermType.Measure:
+      return (
+        <span>
+          <span>{'∠'}</span>
+          <GeometricVariableView variable={angle.point1} />
+          <GeometricVariableView variable={angle.point2} />
+          <GeometricVariableView variable={angle.point3} />
+        </span>
+      );
+  }
+}
+AngleView.displayName = 'AngleView';
+
+export const AreaView: React.FC<{
+  area: AreaMetric;
+}> = ({
+  area,
+}) => {
+  switch (area.termType) {
+    case MetricTermType.Addition:
+      return (
+        <span>
+          <AreaView area={area.area1} />
+          <span>{'+'}</span>
+          <AreaView area={area.area2} />
+        </span>
+      );
+    case MetricTermType.Constant:
+      return <span>{area.name}</span>;
+    case MetricTermType.Measure:
+      return (
+        <span>
+          <span>{'△'}</span>
+          <GeometricVariableView variable={area.point1} />
+          <GeometricVariableView variable={area.point2} />
+          <GeometricVariableView variable={area.point3} />
+        </span>
+      );
+  }
+}
+AreaView.displayName = 'AreaView';
+
+export const MetricView: React.FC<{
+  metric: Metric;
+}> = ({
+  metric,
+}) => {
+  switch (metric.sort) {
+    case MetricSort.Angle:
+      return <AngleView angle={metric} />;
+    case MetricSort.Area:
+      return <AreaView area={metric} />;
+    case MetricSort.Segment:
+      return <SegmentView segment={metric} />;
+  }
+}
+
+export const BinaryInfixVariableRelationView: React.FC<{
+  symbol: string;
+  v1: GeometricVariable;
+  v2: GeometricVariable;
+}> = ({
+  symbol,
+  v1,
+  v2,
+}) => {
+  return (
+    <span>
+      <GeometricVariableView variable={v1} />
+      <span>{symbol}</span>
+      <GeometricVariableView variable={v2} />
+    </span>
+  );
+}
+BinaryInfixVariableRelationView.displayName = 'BinaryInfixVariableRelationView';
+
+export const BinaryInfixMetricRelationView: React.FC<{
+  symbol: string;
+  m1: Metric;
+  m2: Metric;
+}> = ({
+  symbol,
+  m1,
+  m2,
+}) => {
+  return (
+    <span>
+      <MetricView metric={m1} />
+      <span>{symbol}</span>
+      <MetricView metric={m2} />
+    </span>
+  );
+}
+BinaryInfixMetricRelationView.displayName = 'BinaryInfixMetricRelationView';
+
+export const BinaryPrefixVariableRelationView: React.FC<{
+  name: string;
+  v1: GeometricVariable;
+  v2: GeometricVariable;
+}> = ({
+  name,
+  v1,
+  v2,
+}) => {
+  return (
+    <span>
+      <span>{name}</span>
+      <span>(</span>
+      <GeometricVariableView variable={v1} />
+      <span>, </span>
+      <GeometricVariableView variable={v2} />
+      <span>)</span>
+    </span>
+  );
+}
+BinaryPrefixVariableRelationView.displayName = 'BinaryPrefixVariableRelationView';
+
+export const TernaryPrefixVariableRelationView: React.FC<{
+  name: string;
+  v1: GeometricVariable;
+  v2: GeometricVariable;
+  v3: GeometricVariable;
+}> = ({
+  name,
+  v1,
+  v2,
+  v3,
+}) => {
+  return (
+    <span>
+      <span>{name}</span>
+      <span>(</span>
+      <GeometricVariableView variable={v1} />
+      <span>, </span>
+      <GeometricVariableView variable={v2} />
+      <span>, </span>
+      <GeometricVariableView variable={v3} />
+      <span>)</span>
+    </span>
+  );
+}
+TernaryPrefixVariableRelationView.displayName = 'TernaryPrefixVariableRelationView';
+
 export const RelationAssertionView: React.FC<{
   assertion: RelationAssertion;
 }> = ({
@@ -192,189 +378,3 @@ export const RelationAssertionView: React.FC<{
   }
 }
 RelationAssertionView.displayName = 'RelationAssertionView';
-
-export const BinaryInfixVariableRelationView: React.FC<{
-  symbol: string;
-  v1: GeometricVariable;
-  v2: GeometricVariable;
-}> = ({
-  symbol,
-  v1,
-  v2,
-}) => {
-  return (
-    <span>
-      <GeometricVariableView variable={v1} />
-      <span>{symbol}</span>
-      <GeometricVariableView variable={v2} />
-    </span>
-  );
-}
-BinaryInfixVariableRelationView.displayName = 'BinaryInfixVariableRelationView';
-
-export const BinaryInfixMetricRelationView: React.FC<{
-  symbol: string;
-  m1: Metric;
-  m2: Metric;
-}> = ({
-  symbol,
-  m1,
-  m2,
-}) => {
-  return (
-    <span>
-      <MetricView metric={m1} />
-      <span>{symbol}</span>
-      <MetricView metric={m2} />
-    </span>
-  );
-}
-BinaryInfixMetricRelationView.displayName = 'BinaryInfixMetricRelationView';
-
-export const BinaryPrefixVariableRelationView: React.FC<{
-  name: string;
-  v1: GeometricVariable;
-  v2: GeometricVariable;
-}> = ({
-  name,
-  v1,
-  v2,
-}) => {
-  return (
-    <span>
-      <span>{name}</span>
-      <span>(</span>
-      <GeometricVariableView variable={v1} />
-      <span>, </span>
-      <GeometricVariableView variable={v2} />
-      <span>)</span>
-    </span>
-  );
-}
-BinaryPrefixVariableRelationView.displayName = 'BinaryPrefixVariableRelationView';
-
-export const TernaryPrefixVariableRelationView: React.FC<{
-  name: string;
-  v1: GeometricVariable;
-  v2: GeometricVariable;
-  v3: GeometricVariable;
-}> = ({
-  name,
-  v1,
-  v2,
-  v3,
-}) => {
-  return (
-    <span>
-      <span>{name}</span>
-      <span>(</span>
-      <GeometricVariableView variable={v1} />
-      <span>, </span>
-      <GeometricVariableView variable={v2} />
-      <span>, </span>
-      <GeometricVariableView variable={v3} />
-      <span>)</span>
-    </span>
-  );
-}
-TernaryPrefixVariableRelationView.displayName = 'TernaryPrefixVariableRelationView';
-
-export const MetricView: React.FC<{
-  metric: Metric;
-}> = ({
-  metric,
-}) => {
-  switch (metric.sort) {
-    case MetricSort.Angle:
-      return <AngleView angle={metric} />;
-    case MetricSort.Area:
-      return <AreaView area={metric} />;
-    case MetricSort.Segment:
-      return <SegmentView segment={metric} />;
-  }
-}
-
-export const SegmentView: React.FC<{
-  segment: SegmentMetric;
-}> = ({
-  segment,
-}) => {
-  switch (segment.termType) {
-    case MetricTermType.Addition:
-      return (
-        <span>
-          <SegmentView segment={segment.segment1} />
-          <span>{'+'}</span>
-          <SegmentView segment={segment.segment2} />
-        </span>
-      );
-    case MetricTermType.Constant:
-      return <span>{segment.name}</span>;
-    case MetricTermType.Measure:
-      return (
-        <span className={segmentClass}>
-          <GeometricVariableView variable={segment.point1} />
-          <GeometricVariableView variable={segment.point2} />
-        </span>
-      );
-  }
-}
-SegmentView.displayName = 'SegmentView';
-
-export const AngleView: React.FC<{
-  angle: AngleMetric;
-}> = ({
-  angle,
-}) => {
-  switch (angle.termType) {
-    case MetricTermType.Addition:
-      return (
-        <span>
-          <AngleView angle={angle.angle1} />
-          <span>{'+'}</span>
-          <AngleView angle={angle.angle2} />
-        </span>
-      );
-    case MetricTermType.Constant:
-      return <span>{angle.name}</span>;
-    case MetricTermType.Measure:
-      return (
-        <span>
-          <span>{'∠'}</span>
-          <GeometricVariableView variable={angle.point1} />
-          <GeometricVariableView variable={angle.point2} />
-          <GeometricVariableView variable={angle.point3} />
-        </span>
-      );
-  }
-}
-AngleView.displayName = 'AngleView';
-
-export const AreaView: React.FC<{
-  area: AreaMetric;
-}> = ({
-  area,
-}) => {
-  switch (area.termType) {
-    case MetricTermType.Addition:
-      return (
-        <span>
-          <AreaView area={area.area1} />
-          <span>{'+'}</span>
-          <AreaView area={area.area2} />
-        </span>
-      );
-    case MetricTermType.Constant:
-      return <span>{area.name}</span>;
-    case MetricTermType.Measure:
-      return (
-        <span>
-          <span>{'△'}</span>
-          <GeometricVariableView variable={area.point1} />
-          <GeometricVariableView variable={area.point2} />
-          <GeometricVariableView variable={area.point3} />
-        </span>
-      );
-  }
-}
-AreaView.displayName = 'AreaView';

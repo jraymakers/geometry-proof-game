@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { Name } from '../constants/Name';
 import { Pt } from '../constants/Pt';
 import { pointsNotEqual, segmentsEqual } from '../functions/Assertions';
